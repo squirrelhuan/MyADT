@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\back.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\back.png"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\left_back_pressed.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\left_back_pressed.png"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\left_back_normal.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\left_back_normal.png"
+    }
+]

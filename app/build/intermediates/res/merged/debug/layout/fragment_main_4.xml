@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_sys"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/btn_bg_search2"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="同步到pc"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="log内容会同步打印到MyTool-CGQ电脑端"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.huan.myadt.adapter.ToggleButton
+            android:id="@+id/button_sys_server"
+            android:layout_width="50dp"
+            android:layout_height="26dp" >
+        </com.huan.myadt.adapter.ToggleButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_serverip"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/btn_bg_search2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="server ip:"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/et_serverIP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="192.168.0.106"
+            android:paddingBottom="5dp"
+            android:singleLine="true"
+            android:text="123"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_net_play"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/btn_bg_search2"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:id="@+id/tv_net_play"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="app连接提示"
+            android:textColor="@color/black" />
+
+        <com.huan.myadt.adapter.ToggleButton
+            android:id="@+id/button_show_connect_toast"
+            android:layout_width="50dp"
+            android:layout_height="26dp" >
+        </com.huan.myadt.adapter.ToggleButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_net_play1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/btn_bg_search2"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:id="@+id/tv_net_play1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="异常通知"
+            android:textColor="@color/black" />
+
+        <com.huan.myadt.adapter.ToggleButton
+            android:id="@+id/button_show_notification"
+            android:layout_width="50dp"
+            android:layout_height="26dp" >
+        </com.huan.myadt.adapter.ToggleButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_automatic_pause"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/btn_bg_search2"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="异常弹出"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="程序出现异常会自动进入异常详情界面"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.huan.myadt.adapter.ToggleButton
+            android:id="@+id/button_enter_error"
+            android:layout_width="50dp"
+            android:layout_height="26dp" >
+        </com.huan.myadt.adapter.ToggleButton>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/light_blank"
+        android:dividerHeight="1px"
+        android:listSelector="#00000000" >
+    </ListView>
+
+</LinearLayout>

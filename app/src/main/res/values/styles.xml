@@ -1,0 +1,36 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+
+     <style name="AppTheme" parent="AppBaseTheme"></style>
+    
+    <style name="NoTitleBarAndTranslucent" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/back_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/back_exit</item>
+    </style>
+
+    
+     <style name="MainRadioButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/color_text_selected</item> 
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+     <style name="ExceptionRadioButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/color_text_selected</item> 
+        <item name="android:background">@drawable/radiobutton_error_bg</item> 
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+</resources>

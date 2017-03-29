@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\drop_down_checked.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down_checked.png"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\drop_down_selected_icon.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down_selected_icon.png"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\drop_down_unselected_icon.png",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down_unselected_icon.png"
+    }
+]
