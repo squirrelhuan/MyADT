@@ -8,8 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class ConstellationAdapter$ViewHolder$$ViewBinder<T extends com.huan.myadt.adapter.menu.ConstellationAdapter.ViewHolder> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131427466, "field 'mText'");
-    target.mText = finder.castView(view, 2131427466, "field 'mText'");
+    view = finder.findRequiredView(source, 2131493002, "field 'mText'");
+    target.mText = finder.castView(view, 2131493002, "field 'mText'");
   }
 
   @Override public void unbind(T target) {

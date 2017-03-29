@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 23
@@ -20,6 +21,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.huan.myadt.dao'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -31,4 +38,6 @@ dependencies {
     compile files('libs/HapticMediaSync-v1.4.10.jar')
     compile files('libs/jxl.jar')
     compile files('libs/thumbnailator-0.4.8.jar')
+    compile'org.greenrobot:greendao:3.0.1'
+    compile'org.greenrobot:greendao-generator:3.0.0'
 }

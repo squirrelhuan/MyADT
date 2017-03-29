@@ -8,8 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class MainFragment1$$ViewBinder<T extends com.huan.myadt.fragment.MainFragment1> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131427425, "field 'mDropDownMenu'");
-    target.mDropDownMenu = finder.castView(view, 2131427425, "field 'mDropDownMenu'");
+    view = finder.findRequiredView(source, 2131492961, "field 'mDropDownMenu'");
+    target.mDropDownMenu = finder.castView(view, 2131492961, "field 'mDropDownMenu'");
   }
 
   @Override public void unbind(T target) {
