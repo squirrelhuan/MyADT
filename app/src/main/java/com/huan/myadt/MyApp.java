@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.widget.Toast;
 
 import com.huan.myadt.handler.CrashHandler;
 import com.huan.myadt.provider.ApplicationProvider;
@@ -32,8 +31,8 @@ public class MyApp extends Application {
 		applicationProvider.init(this);
 		startService(new Intent(this,MyADTService.class));
 		//异常捕获
-		//crashHandler = CrashHandler.getInstance();  
-	    //crashHandler.init(this.getApplicationContext()); 
+		crashHandler = CrashHandler.getInstance();
+	    crashHandler.init(this.getApplicationContext());
 	}
 
 	public static MyApp getInstance() {

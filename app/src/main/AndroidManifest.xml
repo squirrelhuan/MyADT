@@ -9,26 +9,66 @@
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 手机网络访问权限 必须权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 手机状态访问权限  必须权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 大略位置权限  必须权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- SD卡写入权限  必须权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 设备震动权限  可选权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 识别网络状态权限 可选权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 摄像头权限 可选权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 录音权限  可选权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 识别wifi状态权限 可选权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+   <!-- <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="@string/app_name"
+        android:targetPackage="com.example.junittest" >
+    </instrumentation>-->
 
     <application
         android:name="com.huan.myadt.MyApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:launchMode="singleTask"
         android:theme="@style/AppTheme" >
+        <uses-library android:name="android.test.runner" />
+
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ErrorAnalysisActivity" />
+        <activity
+            android:name=".activity.ErrorAnalysisActivity"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".activity.LearnWebActivity"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".activity.RefrenceWebActivity"
+            android:hardwareAccelerated="true" />
 
         <service android:name=".service.MyADTService" >
             <intent-filter>

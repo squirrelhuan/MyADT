@@ -1,8 +1,6 @@
 package com.huan.myadt.activity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
@@ -13,9 +11,6 @@ import android.widget.Toast;
 import com.huan.myadt.MyApp;
 import com.huan.myadt.R;
 import com.huan.myadt.test.image.ZipImage;
-import com.huan.myadt.utils.ImageUtils;
-
-import java.io.ByteArrayOutputStream;
 
 
 public class LearnWebActivity extends AppCompatActivity /*implements AdListener*/{
@@ -46,19 +41,19 @@ public class LearnWebActivity extends AppCompatActivity /*implements AdListener*
 		iv_test = (ImageView) findViewById(R.id.iv_test);
 		ZipImage zipImage = new ZipImage();
 
-		Bitmap bitmap = zipImage.imageZoom(this);
+		//Bitmap bitmap = zipImage.imageZoom(this);
 		/*Toast.makeText(context, "size:"+bitMap.getRowBytes() * bitMap.getHeight(), Toast.LENGTH_SHORT).show();*/
-		tv_size = (TextView) findViewById(R.id.tv_size);
-		  ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-	        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); 
-	        byte[] b = baos.toByteArray(); 
-	        int length = b.length;
-		tv_size.setText("size:"+length/1024);
+		//tv_size = (TextView) findViewById(R.id.tv_size);
+		//  ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    //    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+	    //    byte[] b = baos.toByteArray();
+	    //    int length = b.length;
+		//tv_size.setText("size:"+length/1024);
 		//tv_size.setText(bitmap.gets);
 		//Drawable drawable = new BitmapDrawable(bitmap);
-		iv_test.setImageBitmap(bitmap);
-		 ImageUtils.savePhoto(bitmap,
-				 Environment.getExternalStorageDirectory()+"/AppIconChange", "icon");
+		//iv_test.setImageBitmap(bitmap);
+		// ImageUtils.savePhoto(bitmap,
+		//		 Environment.getExternalStorageDirectory()+"/AppIconChange", "icon");
 		// FileSize fileSize = new FileSize();
 		 //fileSize.zipFile(new File(Environment.getExternalStorageDirectory()+"/AppIconChange/icon.png"),  Environment.getExternalStorageDirectory()+"/AppIconChange/ic_lanucher.png");
 		/*try {

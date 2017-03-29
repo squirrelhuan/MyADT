@@ -12,6 +12,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_f275d93c6b9125813c6b6e98d59437721b7161b6.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="D:\workspaceAS\MyADT\app\libs\fastjson-1.1.45.android.jar"
         jumboMode="false"
         optimize="true"
@@ -81,15 +90,6 @@
         revision="24.0.1"
         sha1="4f10c440dd7776630aee9da4611a45032db1e041">
         <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\pre-dexed\debug\thumbnailator-0.4.8_48a8d45b300e6aa821a66763a4fd0c827065063c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.1"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_f275d93c6b9125813c6b6e98d59437721b7161b6.jar" />
     </item>
     <item
         is-multidex="false"
