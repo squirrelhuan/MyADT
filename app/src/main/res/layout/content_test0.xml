@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:button="@null"
             android:padding="5dp"
+            android:textColor="@drawable/color_text_selected"
             android:text="1.接口没有提供构造方法"/>
 
         <RadioButton
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:button="@null"
             android:padding="5dp"
+            android:textColor="@drawable/color_text_selected"
             android:text="2.接口中的方法默认使用public、abstract修饰"/>
 
     </RadioGroup>
