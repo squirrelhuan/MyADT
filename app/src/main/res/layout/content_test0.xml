@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.huan.myadt.activity.TestActivity"
+    tools:showIn="@layout/activity_test">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/light_gray"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:text="3. 在使用super 和this关键字时，以下描述正确的是(A)"/>
+
+    <RadioGroup
+        android:id="@+id/rg_question_select_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:padding="5dp"
+            android:text="1.接口没有提供构造方法"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:padding="5dp"
+            android:text="2.接口中的方法默认使用public、abstract修饰"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Button_blue"
+        android:padding="8dp"
+        android:text="right"/>
+        <TextView
+            android:id="@+id/tv_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_green_normal"
+            android:padding="8dp"
+            android:text="描述： Android加载资源图片时，很容易出现OOM的错误，因为Android系统对内存有一个限制，如果超出该限制，就会出现OOM，为了避免这个问题，需要在加载资源时尽量考虑如何节约内存，尽快释放资源等等。"/>
+    </LinearLayout>
+</RelativeLayout>

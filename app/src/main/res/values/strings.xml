@@ -7,5 +7,6 @@
     <string name="action_settings_clear_logs">清除日志</string>
     <string name="action_settings_clear_apps">清除应用</string>
     <string name="title_activity_study">StudyActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

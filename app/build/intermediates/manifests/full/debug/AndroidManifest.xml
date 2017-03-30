@@ -83,6 +83,10 @@
             android:name="com.huan.myadt.activity.MarkdownActivity"
             android:label="@string/title_activity_study"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.huan.myadt.activity.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import com.huan.myadt.R;
 import com.huan.myadt.activity.LearnWebActivity;
 import com.huan.myadt.activity.MainActivity;
 import com.huan.myadt.activity.MarkdownActivity;
+import com.huan.myadt.activity.TestActivity;
 import com.huan.myadt.adapter.MySimpleListAdapter;
 import com.huan.myadt.fragment.base.BaseFragment;
 import com.huan.myadt.utils.IntentUtil;
@@ -72,6 +73,8 @@ public class MainFragment3 extends BaseFragment implements OnItemClickListener,V
 
 		LinearLayout ll_study = (LinearLayout) findViewById(R.id.ll_study);
 		ll_study.setOnClickListener(this);
+		LinearLayout ll_test = (LinearLayout) findViewById(R.id.ll_test);
+		ll_test.setOnClickListener(this);
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -88,6 +91,9 @@ public class MainFragment3 extends BaseFragment implements OnItemClickListener,V
 		switch (v.getId()) {
 			case R.id.ll_study:
 				IntentUtil.jump(getActivity(), MarkdownActivity.class, null);
+				break;
+			case R.id.ll_test:
+				IntentUtil.jump(getActivity(), TestActivity.class, null);
 				break;
 			default:
 				break;
