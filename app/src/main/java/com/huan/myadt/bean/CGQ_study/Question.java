@@ -3,15 +3,18 @@ package com.huan.myadt.bean.CGQ_study;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Created by CGQ on 2017/3/29 0029.
  */
-@Entity
+@Entity(nameInDb = "t_question")
 public class Question {
+    /*@Property(nameInDb = "id")*///通过@Property()这个注解定义我外部数据库的字段名才能解决
     @Id/*(autoincrement=true)*/
     private Long id;
+    @Property(nameInDb = "description")
     private String description;//问题描述
     @Transient
     private int index;//序号

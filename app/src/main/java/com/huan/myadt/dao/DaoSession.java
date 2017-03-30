@@ -38,7 +38,7 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
-        questionDaoConfig.getIdentityScope().clear();
+        questionDaoConfig.clearIdentityScope();
     }
 
     public QuestionDao getQuestionDao() {

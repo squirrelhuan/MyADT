@@ -1,7 +1,7 @@
-#Wed Mar 29 17:24:48 CST 2017
-base.0=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_0e05f10692f699d2ada1f1ff3a73048eccd71192
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_4753a5e51fda28cb80e522f2de978ca6a864e88f\\classes.dex
-base.1=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_4753a5e51fda28cb80e522f2de978ca6a864e88f
-file.0=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_0e05f10692f699d2ada1f1ff3a73048eccd71192\\classes.dex
+#Thu Mar 30 16:06:42 CST 2017
+base.0=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_4753a5e51fda28cb80e522f2de978ca6a864e88f
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_0e05f10692f699d2ada1f1ff3a73048eccd71192\\classes.dex
+base.1=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_0e05f10692f699d2ada1f1ff3a73048eccd71192
+file.0=D\:\\workspaceAS\\MyADT\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_4753a5e51fda28cb80e522f2de978ca6a864e88f\\classes.dex

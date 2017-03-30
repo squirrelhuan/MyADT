@@ -1,28 +1,26 @@
 package com.huan.myadt.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.huan.myadt.R;
 import com.huan.myadt.activity.LearnWebActivity;
 import com.huan.myadt.activity.MainActivity;
+import com.huan.myadt.activity.MarkdownActivity;
 import com.huan.myadt.adapter.MySimpleListAdapter;
 import com.huan.myadt.fragment.base.BaseFragment;
 import com.huan.myadt.utils.IntentUtil;
 
-public class MainFragment3 extends BaseFragment implements OnItemClickListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainFragment3 extends BaseFragment implements OnItemClickListener,View.OnClickListener {
 
 	MainActivity mainActivity;
 	MySimpleListAdapter adapter;
@@ -71,6 +69,9 @@ public class MainFragment3 extends BaseFragment implements OnItemClickListener {
 		adapter = new MySimpleListAdapter(getActivity(), items);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(this);
+
+		LinearLayout ll_study = (LinearLayout) findViewById(R.id.ll_study);
+		ll_study.setOnClickListener(this);
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -80,5 +81,17 @@ public class MainFragment3 extends BaseFragment implements OnItemClickListener {
 		IntentUtil.jump(getActivity(), LearnWebActivity.class, bundle);
 	}
 
+
+	@Override
+	public void onClick(View v) {
+
+		switch (v.getId()) {
+			case R.id.ll_study:
+				IntentUtil.jump(getActivity(), MarkdownActivity.class, null);
+				break;
+			default:
+				break;
+		}
+	}
 	
 }

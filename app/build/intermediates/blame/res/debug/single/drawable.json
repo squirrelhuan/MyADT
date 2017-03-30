@@ -44,8 +44,16 @@
         "source": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
     },
     {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\layout_list_start_pic.xml",
+        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable\\layout_list_start_pic.xml"
+    },
+    {
         "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
         "source": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_fab_background.xml",
+        "source": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\drawable\\design_fab_background.xml"
     },
     {
         "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
@@ -122,5 +130,9 @@
     {
         "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\linearlayout_white.xml",
         "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable\\linearlayout_white.xml"
+    },
+    {
+        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_snackbar_background.xml",
+        "source": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\drawable\\design_snackbar_background.xml"
     }
 ]

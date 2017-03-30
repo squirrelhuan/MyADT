@@ -7,6 +7,26 @@
     android:orientation="vertical" >
 
 
+    <LinearLayout
+        android:id="@+id/ll_study"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/btn_bg_search2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:visibility="visible" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学习"
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
      
     
     <ListView
