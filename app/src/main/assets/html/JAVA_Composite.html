@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《JAVA与模式》之合成模式 - java_my_life - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Rdf1BBttS5_qVaET1myrajVTd62BSCCoJA9fZxGv1ZM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky.css?v=E5nb-2VXXOM_tQ5C4utQQ0Z99gTEPCsZc1RYEu9I_lQ1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky-mobile.css?v=XL4MXhlogY9JJAkggOx9KqKMgdh3EEskqZBkYsbuZhE1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/java-my-life/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/java-my-life/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/java-my-life/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'java-my-life', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/java-my-life/">java_my_life</a></h1>
+<p id="tagline"></p>
+<div id="rigthtag">&nbsp;</div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/java-my-life/archive/2012/04/17/2453861.html">《JAVA与模式》之合成模式</a>
+		</h2>
+		<div id="cnblogs_post_body"><p>在阎宏博士的《JAVA与模式》一书中开头是这样描述合成（Composite）模式的：</p>
+<p><strong>　　合成模式属于对象的结构模式，有时又叫做&ldquo;部分&mdash;&mdash;整体&rdquo;模式。合成模式将对象组织到树结构中，可以用来描述整体与部分的关系。合成模式可以使客户端将单纯元素与复合元素同等看待。<br /></strong></p>
+<hr />
+<h1><strong>合成模式<br /></strong></h1>
+<p><strong>　　</strong>合成模式把部分和整体的关系用树结构表示出来。合成模式使得客户端把一个个单独的成分对象和由它们复合而成的合成对象同等看待。</p>
+<p>　　比如，一个文件系统就是一个典型的合成模式系统。下图是常见的计算机XP文件系统的一部分。</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" /></p>
+<p>　　从上图可以看出，文件系统是一个树结构，树上长有节点。树的节点有两种，一种是树枝节点，即目录，有内部树结构，在图中涂有颜色；另一种是文件，即树叶节点，没有内部树结构。</p>
+<p>　　显然，可以把目录和文件当做同一种对象同等对待和处理，这也就是合成模式的应用。</p>
+<p>　　合成模式可以不提供父对象的管理方法，但是合成模式必须在合适的地方提供子对象的管理方法，诸如：add()、remove()、以及getChild()等。</p>
+<p>　　合成模式的实现根据所实现接口的区别分为两种形式，分别称为<strong>安全式</strong>和<strong>透明式</strong>。</p>
+<h1>安全式合成模式的结构</h1>
+<p>　　安全模式的合成模式要求管理聚集的方法只出现在树枝构件类中，而不出现在树叶构件类中。<img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" /></p>
+<p>　　这种形式涉及到三个角色：</p>
+<p>　　●　　<strong>抽象构件(Component)角色：</strong>这是一个抽象角色，它给参加组合的对象定义出公共的接口及其默认行为，可以用来管理所有的子对象。合成对象通常把它所包含的子对象当做类型为Component的对象。在安全式的合成模式里，构件角色并不定义出管理子对象的方法，这一定义由树枝构件对象给出。</p>
+<p>　　●　　<strong>树叶构件(Leaf)角色：</strong>树叶对象是没有下级子对象的对象，定义出参加组合的原始对象的行为。</p>
+<p>　　●　　<strong>树枝构件(Composite)角色：</strong>代表参加组合的有下级子对象的对象。树枝构件类给出所有的管理子对象的方法，如add()、remove()以及getChild()。</p>
+<h3>源代码</h3>
+<p>　抽象构件角色类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Component {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 输出组建自身的名称
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> printStruct(String preStr);
+}</span></pre>
+</div>
+<p>　树枝构件角色类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Composite <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Component {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 用来存储组合对象中包含的子组件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> List&lt;Component&gt; childComponents = <span style="color: #0000ff;">new</span> ArrayList&lt;Component&gt;<span style="color: #000000;">();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 组合对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造方法，传入组合对象的名字
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> name    组合对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Composite(String name){
+        </span><span style="color: #0000ff;">this</span>.name =<span style="color: #000000;"> name;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，增加一个子构件对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> child 子构件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> addChild(Component child){
+        childComponents.add(child);
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，删除一个子构件对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> index 子构件对象的下标
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> removeChild(<span style="color: #0000ff;">int</span><span style="color: #000000;"> index){
+        childComponents.remove(index);
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，返回所有子构件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> List&lt;Component&gt;<span style="color: #000000;"> getChild(){
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> childComponents;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 输出对象的自身结构
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> preStr 前缀，主要是按照层级拼接空格，实现向后缩进
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> printStruct(String preStr) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 先把自己输出</span>
+        System.out.println(preStr + "+" + <span style="color: #0000ff;">this</span><span style="color: #000000;">.name);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">如果还包含有子组件，那么就输出这些子组件对象</span>
+        <span style="color: #0000ff;">if</span>(<span style="color: #0000ff;">this</span>.childComponents != <span style="color: #0000ff;">null</span><span style="color: #000000;">){
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">添加两个空格，表示向后缩进两个空格</span>
+            preStr += "  "<span style="color: #000000;">;
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">输出当前对象的子对象</span>
+            <span style="color: #0000ff;">for</span><span style="color: #000000;">(Component c : childComponents){
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">递归输出每个子对象</span>
+<span style="color: #000000;">                c.printStruct(preStr);
+            }
+        }
+        
+    }
+
+}</span></pre>
+</div>
+<p>　树叶构件角色类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Leaf <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Component {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 叶子对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造方法，传入叶子对象的名称
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> name 叶子对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Leaf(String name){
+        </span><span style="color: #0000ff;">this</span>.name =<span style="color: #000000;"> name;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 输出叶子对象的结构，叶子对象没有子对象，也就是输出叶子对象的名字
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> preStr 前缀，主要是按照层级拼接的空格，实现向后缩进
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> printStruct(String preStr) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> TODO Auto-generated method stub</span>
+        System.out.println(preStr + "-" +<span style="color: #000000;"> name);
+    }
+
+}</span></pre>
+</div>
+<p>　客户端类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Client {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[]args){
+        Composite root </span>= <span style="color: #0000ff;">new</span> Composite("服装"<span style="color: #000000;">);
+        Composite c1 </span>= <span style="color: #0000ff;">new</span> Composite("男装"<span style="color: #000000;">);
+        Composite c2 </span>= <span style="color: #0000ff;">new</span> Composite("女装"<span style="color: #000000;">);
+        
+        Leaf leaf1 </span>= <span style="color: #0000ff;">new</span> Leaf("衬衫"<span style="color: #000000;">);
+        Leaf leaf2 </span>= <span style="color: #0000ff;">new</span> Leaf("夹克"<span style="color: #000000;">);
+        Leaf leaf3 </span>= <span style="color: #0000ff;">new</span> Leaf("裙子"<span style="color: #000000;">);
+        Leaf leaf4 </span>= <span style="color: #0000ff;">new</span> Leaf("套装"<span style="color: #000000;">);
+        
+        root.addChild(c1);
+        root.addChild(c2);
+        c1.addChild(leaf1);
+        c1.addChild(leaf2);
+        c2.addChild(leaf3);
+        c2.addChild(leaf4);
+        
+        root.printStruct(</span>""<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>　　可以看出，树枝构件类(Composite)给出了addChild()、removeChild()以及getChild()等方法的声明和实现，而树叶构件类则没有给出这些方法的声明或实现。这样的做法是安全的做法，由于这个特点，客户端应用程序不可能错误地调用树叶构件的聚集方法，因为树叶构件没有这些方法，调用会导致编译错误。</p>
+<p>　　安全式合成模式的缺点是不够透明，因为树叶类和树枝类将具有不同的接口。</p>
+<h1>透明式合成模式的结构</h1>
+<p>　　与安全式的合成模式不同的是，透明式的合成模式要求所有的具体构件类，不论树枝构件还是树叶构件，均符合一个固定接口。</p>
+<p>　　<img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" /></p>
+<h3>源代码</h3>
+<p>　　抽象构件角色类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Component {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 输出组建自身的名称
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> printStruct(String preStr);
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，增加一个子构件对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> child 子构件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> addChild(Component child){
+        </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+         * 缺省实现，抛出异常，因为叶子对象没有此功能
+         * 或者子组件没有实现这个功能
+         </span><span style="color: #008000;">*/</span>
+        <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> UnsupportedOperationException("对象不支持此功能"<span style="color: #000000;">);
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，删除一个子构件对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> index 子构件对象的下标
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> removeChild(<span style="color: #0000ff;">int</span><span style="color: #000000;"> index){
+        </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+         * 缺省实现，抛出异常，因为叶子对象没有此功能
+         * 或者子组件没有实现这个功能
+         </span><span style="color: #008000;">*/</span>
+        <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> UnsupportedOperationException("对象不支持此功能"<span style="color: #000000;">);
+    }
+    
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，返回所有子构件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> List&lt;Component&gt;<span style="color: #000000;"> getChild(){
+        </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+         * 缺省实现，抛出异常，因为叶子对象没有此功能
+         * 或者子组件没有实现这个功能
+         </span><span style="color: #008000;">*/</span>
+        <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> UnsupportedOperationException("对象不支持此功能"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>　　树枝构件角色类，此类将implements Conponent改为extends Conponent，其他地方无变化。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Composite <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Component {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 用来存储组合对象中包含的子组件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> List&lt;Component&gt; childComponents = <span style="color: #0000ff;">new</span> ArrayList&lt;Component&gt;<span style="color: #000000;">();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 组合对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造方法，传入组合对象的名字
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> name    组合对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Composite(String name){
+        </span><span style="color: #0000ff;">this</span>.name =<span style="color: #000000;"> name;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，增加一个子构件对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> child 子构件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> addChild(Component child){
+        childComponents.add(child);
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，删除一个子构件对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> index 子构件对象的下标
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> removeChild(<span style="color: #0000ff;">int</span><span style="color: #000000;"> index){
+        childComponents.remove(index);
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 聚集管理方法，返回所有子构件对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> List&lt;Component&gt;<span style="color: #000000;"> getChild(){
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> childComponents;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 输出对象的自身结构
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> preStr 前缀，主要是按照层级拼接空格，实现向后缩进
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> printStruct(String preStr) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 先把自己输出</span>
+        System.out.println(preStr + "+" + <span style="color: #0000ff;">this</span><span style="color: #000000;">.name);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">如果还包含有子组件，那么就输出这些子组件对象</span>
+        <span style="color: #0000ff;">if</span>(<span style="color: #0000ff;">this</span>.childComponents != <span style="color: #0000ff;">null</span><span style="color: #000000;">){
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">添加两个空格，表示向后缩进两个空格</span>
+            preStr += "  "<span style="color: #000000;">;
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">输出当前对象的子对象</span>
+            <span style="color: #0000ff;">for</span><span style="color: #000000;">(Component c : childComponents){
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">递归输出每个子对象</span>
+<span style="color: #000000;">                c.printStruct(preStr);
+            }
+        }
+        
+    }
+
+}</span></pre>
+</div>
+<p>　　树叶构件角色类，此类将implements Conponent改为extends Conponent，其他地方无变化。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Leaf <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Component {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 叶子对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造方法，传入叶子对象的名称
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> name 叶子对象的名字
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Leaf(String name){
+        </span><span style="color: #0000ff;">this</span>.name =<span style="color: #000000;"> name;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 输出叶子对象的结构，叶子对象没有子对象，也就是输出叶子对象的名字
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> preStr 前缀，主要是按照层级拼接的空格，实现向后缩进
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> printStruct(String preStr) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> TODO Auto-generated method stub</span>
+        System.out.println(preStr + "-" +<span style="color: #000000;"> name);
+    }
+
+}</span></pre>
+</div>
+<p>　　客户端类的主要变化是不再区分Composite对象和Leaf对象。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Client {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[]args){
+        <strong>Component</strong> root </span>= <span style="color: #0000ff;">new</span> Composite("服装"<span style="color: #000000;">);
+        <strong>Component</strong> c1 </span>= <span style="color: #0000ff;">new</span> Composite("男装"<span style="color: #000000;">);
+        <strong>Component</strong> c2 </span>= <span style="color: #0000ff;">new</span> Composite("女装"<span style="color: #000000;">);
+        
+        <strong>Component</strong> leaf1 </span>= <span style="color: #0000ff;">new</span> Leaf("衬衫"<span style="color: #000000;">);
+        <strong>Component</strong> leaf2 </span>= <span style="color: #0000ff;">new</span> Leaf("夹克"<span style="color: #000000;">);
+        <strong>Component</strong> leaf3 </span>= <span style="color: #0000ff;">new</span> Leaf("裙子"<span style="color: #000000;">);
+        <strong>Component</strong> leaf4 </span>= <span style="color: #0000ff;">new</span> Leaf("套装"<span style="color: #000000;">);
+        
+        root.addChild(c1);
+        root.addChild(c2);
+        c1.addChild(leaf1);
+        c1.addChild(leaf2);
+        c2.addChild(leaf3);
+        c2.addChild(leaf4);
+        
+        root.printStruct(</span>""<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>　　可以看出，客户端无需再区分操作的是树枝对象(Composite)还是树叶对象(Leaf)了；对于客户端而言，操作的都是Component对象。</p>
+<h1>两种实现方法的选择</h1>
+<p>　　<strong>这里所说的安全性合成模式是指：</strong>从客户端使用合成模式上看是否更安全，如果是安全的，那么就不会有发生误操作的可能，能访问的方法都是被支持的。</p>
+<p>　　<strong>这里所说的透明性合成模式是指：</strong>从客户端使用合成模式上，是否需要区分到底是&ldquo;树枝对象&rdquo;还是&ldquo;树叶对象&rdquo;。如果是透明的，那就不用区分，对于客户而言，都是Compoent对象，具体的类型对于客户端而言是透明的，是无须关心的。</p>
+<p>　　对于合成模式而言，在安全性和透明性上，<strong>会更看重透明性</strong>，毕竟合成模式的目的是：让客户端不再区分操作的是树枝对象还是树叶对象，而是以一个统一的方式来操作。</p>
+<p>　　而且对于安全性的实现，需要区分是树枝对象还是树叶对象。有时候，需要将对象进行类型转换，却发现类型信息丢失了，只好强行转换，这种类型转换必然是不够安全的。</p>
+<p>　　因此在使用合成模式的时候，建议多采用透明性的实现方式。　</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		<p class="postfoot">
+			posted on <span id="post-date">2012-04-17 16:13</span> <a href='http://www.cnblogs.com/java-my-life/'>java_my_life</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2453861" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2453861);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=106378,cb_entryId=2453861,cb_blogApp=currentBlogApp,cb_blogUserGuid='739a0020-f8db-df11-ac81-842b2b196315',cb_entryCreatedDate='2012/4/17 16:13:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+			<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/java-my-life/">首页</a></li>
+			<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+			<li><a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/java_my_life">联系</a></li>
+			<li><a id="blog_nav_rss" href="http://www.cnblogs.com/java-my-life/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/java-my-life/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+			<li><a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div id="blog_stats">
+<h3>统计</h3>
+	<ul>
+		<li>随笔 - 28
+		<li>文章 - 0
+		<li>评论 - 306
+		<li>引用 - 0
+	</li>
+</ul></div>
+		
+<div class="newsItem">
+<h3>公告</h3>
+<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+		<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>			
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; java_my_life
+</p>
+	
+
+</body>
+</html>

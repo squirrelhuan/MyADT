@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《JAVA与模式》之不变模式 - java_my_life - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Rdf1BBttS5_qVaET1myrajVTd62BSCCoJA9fZxGv1ZM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky.css?v=E5nb-2VXXOM_tQ5C4utQQ0Z99gTEPCsZc1RYEu9I_lQ1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky-mobile.css?v=XL4MXhlogY9JJAkggOx9KqKMgdh3EEskqZBkYsbuZhE1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/java-my-life/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/java-my-life/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/java-my-life/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'java-my-life', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/java-my-life/">java_my_life</a></h1>
+<p id="tagline"></p>
+<div id="rigthtag">&nbsp;</div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/java-my-life/archive/2012/05/08/2487757.html">《JAVA与模式》之不变模式</a>
+		</h2>
+		<div id="cnblogs_post_body"><p>在阎宏博士的《JAVA与模式》一书中开头是这样描述不变（Immutable）模式的：</p>
+<p>　　<strong>一个对象的状态在对象被创建之后就不再变化，这就是所谓的不变模式。</strong></p>
+<hr />
+<h1><span style="font-size: 18pt;">不变模式的结构</span></h1>
+<p>　　不变模式可增强对象的强壮型(robustness)。不变模式允许多个对象共享某一个对象，降低了对该对象进行并发访问时的同步化开销。如果需要修改一个不变对象的状态，那么就需要建立一个新的同类型对象，并在创建时将这个新的状态存储在新对象里。</p>
+<p>　　不变模式只涉及到一个类。一个类的内部状态创建后，在整个生命周期都不会发生变化时，这样的类称作不变类。这种使用不变类的做法叫做不变模式。不变模式有两种形式：一种是弱不变模式，另一种是强不变模式。</p>
+<h2>　弱不变模式</h2>
+<p>　　一个类的实例的状态是不可改变的；但是这个类的子类的实例具有可能会变化的状态。这样的类符合弱不变模式的定义。要实现弱不变模式，一个类必须满足下面条件：</p>
+<p>　　第一、所考虑的对象没有任何方法会修改对象的状态；这样一来，当对象的构造函数将对象的状态初始化之后，对象的状态便不再改变。</p>
+<p>　　第二、所有属性都应当是私有的。不要声明任何的公开的属性，以防客户端对象直接修改任何的内部状态。</p>
+<p>　　第三、这个对象所引用到的其他对象如何是可变对象的话，必须设法限制外界对这些可变对象的访问，以防止外界修改这些对象。如何可能，应当尽量在不变对象内部初始化这些被引用的对象，而不要在客户端初始化，然后再传入到不变对象内部来。如果某个可变对象必须在客户端初始化，然后再传入到不变对象里的话，就应当考虑在不变对象初始化的时候，将这个可变对象复制一份，而不要使用原来的拷贝。</p>
+<p>　　<strong>弱不变模式的缺点是：</strong></p>
+<p><strong>　　</strong>第一、一个弱不变对象的子对象可以是可变对象；换言之，一个弱不变对象的子对象可能是可变的。</p>
+<p>　　第二、这个可变的子对象可能可以修改父对象的状态，从而可能会允许外界修改父对象的状态。</p>
+<p>&nbsp;</p>
+<h2>　强不变模式</h2>
+<p>　　一个类的实例不会改变，同时它的子类的实例也具有不可变化的状态。这样的类符合强不变模式。要实现强不变模式，一个类必须首先满足弱不变模式所要求的所有条件，并且还有满足下面条件之一：</p>
+<p>　　第一、所考虑的类所有的方法都应当是final，这样这个类的子类不能够置换掉此类的方法。</p>
+<p>　　第二、这个类本身就是final的，那么这个类就不可能会有子类，从而也就不可能有被子类修改的问题。</p>
+<p>&nbsp;</p>
+<h2>　&ldquo;不变"和"只读"的区别</h2>
+<p>　　"不变"(Immutable)与"只读"(Read Only)是不同的。当一个变量是&rdquo;只读&ldquo;时，变量的值不能直接改变，但是可以在其他变量发生改变的时候发生改变。</p>
+<p>　　比如，一个人的出生年月日是&rdquo;不变&ldquo;属性，而一个人的年龄便是&rdquo;只读&ldquo;属性，不是&rdquo;不变&ldquo;属性。随着时间的变化，一个人的年龄会随之发生变化，而人的出生年月日则不会变化。这就是&rdquo;不变&ldquo;和&ldquo;只读&rdquo;的区别。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1><span style="font-size: 18pt;">不变模式在JAVA中的应用</span></h1>
+<p>　　不变模式在JAVA中最著名的应用便是java.lang.String类。String类是一个强不变类型，在出现如下的语句时：</p>
+<div class="cnblogs_code">
+<pre>        String a = "test"<span style="color: #000000;">;
+        String b </span>= "test"<span style="color: #000000;">;
+        String c </span>= "test";</pre>
+</div>
+<p>　　JAVA虚拟机其实只会创建这样一个字符串的实例，而这三个String对象都在共享这一个值。</p>
+<p>&nbsp;</p>
+<h1><span style="font-size: 18pt;">不变模式的优点和缺点</span></h1>
+<p>　　不变模式有很明显的优点：</p>
+<p>　　（1）因为不能修改一个不变对象的状态，所以可以避免由此引起的不必要的程序错误；换言之，一个不变的对象要比可变的对象更加容易维护。</p>
+<p>　　（2）因为没有任何一个线程能够修改不变对象的内部状态，一个不变对象自动就是线程安全的，这样就可以省掉处理同步化的开销。一个不变对象可以自由地被不同的客户端共享。</p>
+<p>　　不变模式的缺点：</p>
+<p>　　不变模式唯一的缺点是：一旦需要修改一个不变对象的状态，就只好创建一个新的同类对象。在需要频繁修改不变对象的环境里，会有大量的不变对象作为中间结果被创建出来，再被JAVA垃圾收集器收集走。这是一种资源上的浪费。</p>
+<p>　　在设计任何一个类的时候，应当慎重考虑其状态是否有需要变化的可能性。除非其状态有变化的必要，不然应当将它设计成不变类。</p>
+<p>&nbsp;</p>
+<p>　　</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		<p class="postfoot">
+			posted on <span id="post-date">2012-05-08 17:42</span> <a href='http://www.cnblogs.com/java-my-life/'>java_my_life</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2487757" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2487757);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=106378,cb_entryId=2487757,cb_blogApp=currentBlogApp,cb_blogUserGuid='739a0020-f8db-df11-ac81-842b2b196315',cb_entryCreatedDate='2012/5/8 17:42:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+			<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/java-my-life/">首页</a></li>
+			<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+			<li><a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/java_my_life">联系</a></li>
+			<li><a id="blog_nav_rss" href="http://www.cnblogs.com/java-my-life/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/java-my-life/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+			<li><a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div id="blog_stats">
+<h3>统计</h3>
+	<ul>
+		<li>随笔 - 28
+		<li>文章 - 0
+		<li>评论 - 306
+		<li>引用 - 0
+	</li>
+</ul></div>
+		
+<div class="newsItem">
+<h3>公告</h3>
+<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+		<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>			
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; java_my_life
+</p>
+	
+
+</body>
+</html>

@@ -13,57 +13,94 @@
     tools:context="com.huan.myadt.activity.TestActivity"
     tools:showIn="@layout/activity_test">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@color/light_gray"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:text="3. 在使用super 和this关键字时，以下描述正确的是(A)"/>
-
-    <RadioGroup
-        android:id="@+id/rg_question_select_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-        <RadioButton
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@null"
+            android:background="@color/light_gray"
             android:padding="5dp"
-            android:textColor="@drawable/color_text_selected"
-            android:text="1.接口没有提供构造方法"/>
+            android:text="3. 在使用super 和this关键字时，以下描述正确的是(A)"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/rg_question_select_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@null"
-            android:padding="5dp"
-            android:textColor="@drawable/color_text_selected"
-            android:text="2.接口中的方法默认使用public、abstract修饰"/>
+            android:padding="15dp">
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_001"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="1.接口没有提供构造方法"
+                android:textColor="@drawable/color_text_selected_blue"
+                android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Button_blue"
-        android:padding="8dp"
-        android:text="right"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/tv_last_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="5dp"
+                android:background="@color/button_green_normal"
+                android:padding="8dp"
+                android:text="上一題" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_next_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/button_green_normal"
+                android:padding="8dp"
+                android:text="下一題" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Button_blue"
+                android:padding="8dp"
+                android:text="描述"/>
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/tv_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="80dp"
             android:background="@color/button_green_normal"
             android:padding="8dp"
-            android:text="描述： Android加载资源图片时，很容易出现OOM的错误，因为Android系统对内存有一个限制，如果超出该限制，就会出现OOM，为了避免这个问题，需要在加载资源时尽量考虑如何节约内存，尽快释放资源等等。"/>
+            android:text="描述： Android加载资源图片时，很容易出现OOM的错误，因为Android系统对内存有一个限制，如果超出该限制，就会出现OOM，为了避免这个问题，需要在加载资源时尽量考虑如何节约内存，尽快释放资源等等。" />
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

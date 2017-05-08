@@ -1,0 +1,16 @@
+[{"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":0,"life":0,"magicPoint":0,"name":"泡泡",headImage:"paopao.png","speed":0,"type":0},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"马面",headImage:"mamian.png","speed":0,"type":1},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"古代瑞兽",headImage:"gudairuishou.png","speed":0,"type":2},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"龟丞相",headImage:"guichengxiang.png","speed":0,"type":3},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"芙蓉仙子",headImage:"furongxianzi.png","speed":0,"type":4},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"鬼冥书生",headImage:"guimingshusheng.png","speed":0,"type":5},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"猴小仙",headImage:"houxiaoxian.png","speed":0,"type":6},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"花妖",headImage:"huayao.png","speed":0,"type":7},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"蛟龙",headImage:"jiaolong.png","speed":0,"type":8},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"鲛将军",headImage:"jiaojiangjun.png","speed":0,"type":9},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"龙女",headImage:"longnv.png","speed":0,"type":10},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"蟠桃童子",headImage:"pantaotongzi.png","speed":0,"type":11},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"千年僵尸",headImage:"qiannianjiangshi.png","speed":0,"type":12},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"天兵",headImage:"tianbing.png","speed":0,"type":13},
+  {"damage":0,"experience":0,"grade":0,"healthPoint":0,"leve":9,"life":0,"magicPoint":0,"name":"孤魂野鬼",headImage:"guhunyegui.png","speed":0,"type":100}]
+

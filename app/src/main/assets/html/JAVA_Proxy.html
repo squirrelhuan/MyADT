@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《JAVA与模式》之代理模式 - java_my_life - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Rdf1BBttS5_qVaET1myrajVTd62BSCCoJA9fZxGv1ZM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky.css?v=E5nb-2VXXOM_tQ5C4utQQ0Z99gTEPCsZc1RYEu9I_lQ1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky-mobile.css?v=XL4MXhlogY9JJAkggOx9KqKMgdh3EEskqZBkYsbuZhE1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/java-my-life/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/java-my-life/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/java-my-life/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'java-my-life', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/java-my-life/">java_my_life</a></h1>
+<p id="tagline"></p>
+<div id="rigthtag">&nbsp;</div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/java-my-life/archive/2012/04/23/2466712.html">《JAVA与模式》之代理模式</a>
+		</h2>
+		<div id="cnblogs_post_body"><p>在阎宏博士的《JAVA与模式》一书中开头是这样描述代理（Proxy）模式的：</p>
+<p><strong>　　代理模式是对象的结构模式。代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。</strong></p>
+<hr />
+<h1>代理模式的结构</h1>
+<p>　　所谓代理，就是一个人或者机构代表另一个人或者机构采取行动。在一些情况下，一个客户不想或者不能够直接引用一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
+<p>　　代理模式类图如下：</p>
+<p>　　<img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkgAAAD2CAIAAACiI+/UAAAeaklEQVR4nO3dLYzcPB7HcR9bctIDq0MPibRw4QMiPYUHN+yBlUweWBDpRjpQFLwk0ko9UBDQslP0gMLAEksLq6BlKSwIKMyB/63l2pmX3Ukynsz3A6ruvGQ8ju1f4nhm1AAAwIqoUxcAAIApEWwAgFUh2AAAq0KwAQBWhWADAKwKwQYAWBWCDQCwKgQbAGBVCDYAwKoQbACAVSHYAACr8sJge3x8bAAAmMLj4+OJg+3r168KAIDpfP78+ZTB1jSNUur29vYdAADHefPmjVLqw4cPpw+2CQsBALhYk2cKwQYAOCWCDQCwKgQbAGBVCDYAwKoQbACAVSHYgGEYBq110zT2z7Is8zwviuJ0JXqhpmmKoiiKwr4duUVrvfe5RVHUdT1v+YD5EWzA/1tgnuf2lrZtkyR5WbC1bTtd0bbq+77ve+/GqqqSJKnr2hiTpmlVVfJIrXWaprs3aIxRSu192CGWqQFgG4INGPI8T9PUG9PTNH1ZsKVpaoyZqGhbyWmZe0vXdZJq8mfTNEmSdF0nDz4kscqyPD6TJFOP3AhwDIIN+H+GJUkS3vjcTfV9nyTJAsGWZZlXvPAtJEkip6EHBtsklnwtYBTBBgxpmsrpjnuZTYKtqqosy/I8905lyrKU26uqkpOkvu9lTJdZzaIoyrK0t9vJwLqu5Yl2U1VVaa0lqOQEy2qaRu6STYmiKLIsU0rJU2y8jZ50yi1SMNma1jq8kFaWpTzGC0v7Nr2CdV2X57n3Rsqy1ForpWQWtyiKcLIUWADBhksnw/0wDN5FtTRNkyTRWhtj8jy303pylyRN0zRuGBhjqqpSSlVVZYyxWSi3J0kiQ799zDAMEg+y5bIs3VMueYpkbZqmNkKMMcYYORuT/8vtSZKEwSYblJM5mSO11+HcR7ZtK9v0akDephTMfTvyXoanWVx3I5KmbsGAhRFsuHR5nkt4eCss0jTNssz+6Q76bsg1TeOetcgSjHBMl9vt0kRJtWEY3JMe97neBbMsy7zQCte27A02e/4Ubs0+3m7Tq40sy2zh3ZQdncJlKhKnRbDh0slALGO9O0Z783LueC2PDCfohp3B5sahq+s6mV2UCUZ5rnf2Jg9z/wyDbXQq0gabe1eYRuFbtmerwp6ZtW3rvUFvkpZgw8kRbLh0dhT2MmlHsA3DUFWVxEaWZe7IvjvYwleXSU45gXOfuy17rDDYwvMw7xqbvf3AYLPX8KwdbzB8UeBUCDZcNHuBTbhpEQabPLLve7vGpG1bb8byWcHmzTe6z5UrYV5R3T/dosocY/gUeyXsBcFm369bWltmtzB937vR7gbb6BkqMDeCDRdNljXaP735RnslSRbxy2hujHGTrK5rNzNk3JdwksUdcvtosHkpKH9WVSVpZGNJ2DUmwgabfLGILbN9iptzXrBt+ySDe7t3WU6WTdqSuJnnLbN0L865FQUshmDD5ZKPMGutZfiWP22cyKmYJJ+3KFGeJQlkv+DDkqtlstxxeFruL1OO4aeqZf6wqip5vCwAkZyQZNJaSyx5ryLBI5e+bODJokT5pIH7OXG5hidlls8PjFaIF3gSUe5nFYQ9T7WbDWtV3g5f0IWTINhwufq+d1el2z9lYk3Swr3F6rqu6zq5a3S2zVvsbn42+mD7ot5r7XgVWV6/99WHp7lKebx3l/unN8e47SlhsT1SOcxD4lQINuByyRJHmTJ1P5EGnDWCDbho8k0o3pebAGeNYAMArArBBgBYFYINALAqBBsAYFUINgDAqhBsAIBVIdgAAKsSUbBtNpsGAIDj3N3dnT7YPn36pAAAmM5mszllsDVNo5S6vr7+HQCA49zc3Cil3r9/f/pg4xobAOB4k2cKwQYAOCWCDQCwKgQbAGBVCDYAwKoQbACAVSHYAACrQrABAFaFYAMArArBBgBYFYINALAqBBsAYFUINgDAqhBsAIBVIdgAAKtCsAEAVoVgAwCsCsEGAFgVgg0AsCoEGwBgVQg2AMCqEGwAgFUh2AAAqxJRsG02mwYAgOPc3d2dPtg+ffqkAACYzmazOWWwNU2jlLq+vv4dAIDj3NzcKKXev39/+mDjGhsA4HiTZwrBBgA4JYItasaYpmmGYSiK4tRlAYDzQLDFq+s6rbX8v2maqqpOWx4AOAsE2zS6rsuyrG3bCbeZZVnf9/bPPM+n3f6E6rrOsmz3vZx0AlhGvMHmjunx2FaqruuSJKnreqoXKssyPEXbER6nVdd1kiRd1217QFEUBBuAZcQbbHGOg4uVKk3T8MY8z+WS29kh2AAshmB7ntG8mZwxxl5dO+T23ZaZwNx9hk2wAVjMmQVbnudVVeV5bif97PWbsizzPNdae+c0cpc7s1fXdZ7naZoWRdF1XVEUWZa59xZFYf91XzrLMqVUnud5nrvFk1uSJAkLbF/dPl6WhGRZVte11lprHb7THTHw3GQty1IpdUi2SU1KwaQMUkX2AWHly9uRah8tmNZa7h19mwAwh7iCre/74onElTvEZ1lmjJH/F0Vho0iGYHvGkKapvdiT57n7lLIs7YsWRSGBNAxDWZZyJtS2rTtAp2nqRcJoem27S5LAvkd7smWMSZLE3uUW2JbNFnvvq+zWtu3hV+aapnHfvnt2uK3yhTEmDLY0Te1BBsEGYDFxBZt7ozcOyrmCe4sd4r3zG0msIUipruvcPyU7vZL0fe+ejqRp6gXM4cHmvdzgxKQXA+GrTBhsz2ULJt8lKv/fUfkiDDYvI5mKBLCYswk2d7ZQJEkiOeENmlVVyZBalmWSJIXDHY63DbUyOSmnd8cEmz0LtLTWcsp4SLBNNRX5XHmeSyHdJNtR+SIMNnt4Yf8k2AAs42yCLU3TcGyVPNgWbDJFue1FR4daOc9wZzVfHGxFUYTBJq+4N9i2zR+685kzsae5buXsqHwxGmzeaTTBBmAZZxNs7voLsW0q0q7s8KYih2FwL2WNDrVZlrlrT44JtvDVD5+KHLacmYVLY+Yga0bcE7IdlS9GpyLdbCbYACwm3mALuScr7ipH79zIXYth1/gNw2CMcU87tgWbu8BEIsc7d5HzufCz2KOLR2xiGWPs1NwhwSbLMt1b5MtNhmeS+dhnrfgfPdPdVvli2+IRuyPSNPWu0gHATM4p2IZhkCX4ZVm6uSLBJndprb1B3K5+tDkhy/1labu3eH14WsooY7dM/XkXk2QJu/dJAPn8gF1m6b56VVVVVY0u9x+cRfbh13Zord0bvT8PVNd1uOpyN7nKGN4+Wvl2ub9UpvtEeadyo3zmIc5vkwGwMmcWbKNWPM1lz5O8OAEAbHP2wdb3vZwWrPVsQE62zvSbtABgeWsINmOMMWatwQYAeJazDzYAAFwEGwBgVQg2AMCqEGwAgFUh2AAAqxJRsG02mwYAgOPc3d2dPti+fPmiMIO//e1vpy4CgEXR662PHz+eMtiGYbi/v3+H6fz73//+xz/+oZT6+9///q9//evUxQEwO3q96+7u7sePHycONkzr3bt3Sqk3b94opd6+fXvq4gCYHb1+PgTb6X39+vXq6uqf//znMAy3t7dXV1dfv349daEAzIhePyuC7fRev359dXX1+Pg4DMPDw8PV1dXt7e2pCwVgRvT6WRFsJ/bhwwel1N3dnb3l7du3Sqn//ve/JywVgPnQ6+dGsJ3St2/fXr16dXNz4974/fv3V69eXV9fT3gpFUAk6PULINhO6Y8//lBKPTw8eLff3997B3QA1oFevwCC7WQ+f/68YzXUzc3NL7/88u3bt4VLBWA+9PplEGyn8ePHj19//fXXX3/dNvPQNI1S6s8//1y4YABmQq9fDMF2GpvNRin1+fPnHY+5vb0dnbIAcI7o9Ysh2E5AVvf+8ccfux/27du3q6ur3377bZlSAZgPvX5JBNsJHD6TLt9NwCJg4NzR65dEsC1Nvsf6/v7+kAf/+PHj1atXr169YhEwcL7o9Qsj2BYl8wyvX78+/CkfP35USr179262QgGYEb1+eQTbol72pXC//fbb1dUVi4CBc0SvXx7BtpwXH4U9PDwopfgqOeDs0OtPgmBbyJFfmfPnn38qpb58+TJ5wQDMhF5/KgTbQqSNvnv37mU/nS7Hfd73ywGIGb3+VAi2JXz79m2qX0/n8A04C/T6EyLYFvLhw4fdv4yulNr76+n39/esAAbOxd5ef0jHp9e/AMEWC6XYF8DFoePPgTqNBe0buEB0/DlQp7GgfQMXiI4/B+o0FrRv4ALR8edAncaC9g1cIDr+HKjTWNC+gQtEx58DdRoL2jdwgej4c6BOY0H7Bi4QHX8O1GksaN/ABaLjz4E6jQXtG7hAdPw5UKexoH0DF4iOPwfqNBa0b+AC0fHnQJ3GgvYNXCA6/hyo01jQvoELRMefA3UaC9o3cIHo+HOgTmNB+wYuEB1/DtRpLGjfwAWi48+BOo0F7Ru4QHT8OVCnsaB9AxeIjj8H6jQWtG/gAtHx50CdxoL2DVwgOv4cqNNY0L6BC0THnwN1GgvaN3CB6PhzoE5jQfsGLhAdfw7UaSxo38AFouPPgTqNBe0buEB0/DlQp7GgfQMXiI4/B+o0FrRv4ALR8edAncaC9g1cIDr+HF5Yp4+Pjw0mpZQ6dRFW5fHxcdKegikxgFh0fDFth31JsH39+lUB0fv8+fOEXQVTYQDBqAk77EuCrWkapdTt7e07IEpv3rxRSn348GGqfoIJMYDAM3mHfXmwMWogWjTRmLF34Jm8SRBsWCGaaMzYO/AQbMB+NNGYsXfgIdiA/WiiMWPvwEOwAfvRRGPG3oGHYAP2o4nGjL0DD8E2peJnxpiTFKOqKilA13VyS1mWeZ4XRbH7iW3bFkXRtu38ZTwzq2miqxTV3inL0h0EmqaZZINZlo32X7m3LEt7S1EUWuu9g09d13sHhPNFsE3JGJMkSZ7nxpimadI0TdN04TJordM0NcbUdZ0kibTvtm2TJNnbjouiUEod39zXF42raaKrFNXeadtWOr47CNhDzJdt0BiTpmnYMdM0lQwry9IONW7H3yFNU6XU8Qffpzp8341gm5ibH33fHxInE6qqKkmSvu/lz6IobHMf7RihSUorvfr47cRjTU10fWLbO+4Rbdd1crB7/Da9vimHsPbPLMu01vL/Q4KtbVv3PO/FkiQ5fiOTI9gm5iXZwidtaZpmWWb/bNtWKSWTIQcG2/Ekzgk2LCa2veP1+iRJ3F754m16/TdJEjeZyrK0GbNYB2yahmBbrhAn5AVbkiRa66ZpZJZc2ndZllmWuY2yqio54Kqqyt5oJ+vl6aLve/unbMHeFb66e4t0DHmhPM/D2cKiKPI897pE13V5nnuldcucZVld13JL3/dyjqiUkkt6kxwSxmBNTXR9Yts74RnbaGf3Lr/JsDDa14Yg2Iwx3kSie0uSJE3TyAbDw1npp1prL5OaptFaZ1nmjkJu2bTWdtxomkaGCxlhJrmaOCGCbWJutJRlKSdMfd8bY/I8lzlxiRCllMy8y5RC13Vd16Vpamct2raVxtd1ncybS4T0fe8mUFVVMvUnXSgMNknTNE0lZaUksln3kd5lueHpkqG0V2/ewy2zLZg8paoqpVRVVcaY1VxsW1MTXZ/Y9k54jc3epbWWCUM517ER4uaWpEu4TbdrSy8Lg01CUfKmLEtjTJZl4aSRXJZzg02GETsK2VnN4elK3vB0pUPGDTumyYhhjLFXQGJAsE1MmpQ0pizL3KOYoijcYzdp09K+bcZITtg8sFfptNY2PLyH5Xku25SWHQabNGtvlnLbxT832NyUlbukzN6VPG9T4bHkCqypia5PbHtHDiLl4NVLIzdLvMlD28FloAi36W5K1nmFwRbO3Mj1iLA/ymGr/F/GEztYyVoz97DbfQl3U6NFjQHBNrEdq0VGG4F3JhRuQVq/ewAlZEZxGAZ3zdXoGZs81+sY2y7+2WCTti4nXsLmnHcMGJ75EWxYUmx7x3Yu72jSrlgWXs7J5J50rr3BJm85DDY59PQuKIwOSm6wSUmMw+ac91xvDoZgW7QQJ7Q72MIsCQPGa8ESMGGwydSBrC12X91bf+VdY9vxuvbx0iWkn8ilMktODXeviCHYsLDY9o7tIO7c3fB0Jlf8TGY+JM8kSw45Y3PXhQnvGtuzgk1e0SvYaLB5CLZFC3FCzw02maT2tuBePZZrue5MhftIrbX7YO/8T1q/HGSFwRaG5fBzl3CvAbjCs0y3bAQbFhbb3nGP/NxjzbCzS+aFn9LZG2xDcKVgx6rI0Y7sBpt3QWRwpmHCY2W3s7tFPeazepMj2Cb23GCTEzLbCr0WVpalxI8sPPGea5eWbNuaexXa7QZy6W50FZP7dLuM025N7pJCumtM3Ie5ZZDPqo/WxnlZUxNdn9j2jhts7uJDKaftd7bjeElmL8a7835hsHkzme4D3ONgWREWFtINtmHsc0puYdwXdXPOLcOSn2vai2CbkjQCb83IMAx2ub+0Hm85r0wqlmUpXx/gLX2UZiQXor0ty3UvrwzS1KT9uffKdH+e5/Jy2z4x6h3rybOk8O4Zni2bvIo38y6JKBcMDqm3+K2mia5SVHtHzpzsvIu9lCAnZNI9vY5jFyJWVSUHo0ope+1cPvYjq8C80UM2Is/y1jHaIWXbvIsXbPKnrNmWbdq7ZJpUlrCFA448S2t9/IfQJ0SwTcleevVWvsrSWGt0EbzcNbq1bVuWhhtuquu6cGvSSUYL4K3vHy1YWObRV9nxds7aaproKkW1d+QbsNwu4/WFbR1HbpR+2ratnYmxGxztiXKvd6Pb2b0ZHfvI0Qmk8CleGUbf8rYx7YQItrMkx3eTnPvLh+1k9aNdaQkPTTRm7J0DyaSRefqAXXjZfjUItrMks3xTHSXJFKj3UTm4aKIxY+8cTmYvR797aE0INmA/mmjM2DvwEGzAfjTRmLF34CHYgP1oojFj78BDsAH70URjxt6Bh2AD9qOJxoy9Aw/BBuxHE40Zewcegg3YjyYaM/YOPBEF22azaYAo3d3dMXRGq2EAwc8m77AvCbZPnz4pIHqbzWaqfoIJMYBg1IQd9uVnbNfX178DUbq5uVFKvX//fqp+ggkxgMAzeYflGhtWiCYag7dv337//j28nb0Dz+RNgmDDCtFEY/Dw8PD69esw29g78BBswH400UiMZht7B54LDba+74uikJ/OC+9t29b7Qb+maYqi2Pt92G3bjv5AWlSKJ2VZjv720rPMVJNSzmMKNi2GzniE2cbegedCg03UdT36C9R2INZa23Ffa733lzPl92qPjIq59X2fJIn8YGnbtt6v5b7M5DXZtq1S6viCTYWhMypetrF34LnoYDPGeMOx/Ea7/bNt2yzL5P9FURzyk9CT/MrR3L/26f5MdtM04a9mP9fqa5KhMzZutrF34CHYfhqO8zz3hkJ7BnbgcHy8vu9tBszETTJjzBzBtrKaZOiMkM029g48ZxNsciFHxqmu67wrN8MwlGVZ17U3edV1XVVVdV2XZRnOEIbDcTgvZ2+R4VguERVFIVN5YQm9S01d10nBmqbxHh8WTK5XpWmaJIlsLXzWNvKruAc+2E2yqqq8Sjh5TVZVZff13oINU9fkKIbOOEm2/fXXX+wduOIKtr7vzRh5mFwcsldukiSxd2mtZXw0xtgBses6d3BM09QbkcPh2N2mfZasYpDxsa7r0SfaV3RvN8bYsCnL0l0NobWWoVbe1O5SHeK5wSYVK9fG3LccSU3K490/Rws2zFCTowi2aD08PMincdk7sM4p2IZhkGCT/9sjfTu0iSzL5Clt27pjvTeCD88fjt2tZVk2urTBCwBv4/KfqqrcE7skSdzrSRMOx9vI2yzLMgyPOGtyW8EWq0lpoogZwQYrrmDb+8jRq0GSdjYF8zx3z41kyivP80OG4/Ax7nDs3iWnHWFh3LMce2Ik7Ma3DeXbSjU5W43eGs44a3JHwRarSc7YovX9+3fO2OBZYbAZY+RkTiYG7ZH+IcNxlmXeIGu38Nzh2BjjBZt9eliS3aWanK1GrbV78hRnTe4o2GI1SbDF6fv3769fv/7Pf/7D3oFrDcG2bXTTWruH84cMx97UlvuK4XA8+llsbzgefRdaa++57paXDLa2bd1CRluTOwq2TE0SbBGSVHt4eGDvwLOGYPPG0KqqZHrNW5gng6M7Do4OfFmW2dk5WZ4n//fG33ABhX26/b+XB3ZTTdO4DzPGyEoK4a5AOfx7TLTWh39VhxdmtpDR1uS2gs1Rk6MYOmNjU21g7yBwNsEmE1Z29XZ4r4zsRVHYIdgYk2VZ0zR1Xdu1+DLwyXJwuVzkPkXked40jTsWD8NQlqUsN5drPO4A6vIWqctcn7yWu66hqiqZrBt9O/ZZ214llCTJgZ/Zkmq0M5Cy3N/WQLQ1OVqwYYaaHMXQGRU31Qb2DgJnE2wxs4lljBn9ykQcyJ1InHs+9lnOvYmuiZdqA3sHAYLtWFVVydrCtm3db0TEc8k60qZpuq7bcSZ3EmfdRNckTLWBvYMAwTYBWQd/5HdbYHj6NQB7CS0e595E12E01Qb2DgIEG7AfTTQGt7e3YaoN7B0ECDZgP5pozNg78BBswH400Zixd+Ah2ID9aKIxY+/AQ7AB+9FEY8begSeiYNtsNg0Qpbu7O4bOaDUMIPjZ5B32JcH26dOnyX67ApjNZrOZqp9gQgwgGDVhh335Gdv19fXvQJTkh1Hev38/VT/BhBhA4Jm8w3KNDStEE40ZeweeyZsEwYYVoonGjL0DD8EWNWNM8/TjnKcuy0WjicaMvbPNxQ4gBFu8uq6zvxXQNI33izBYEk00ZuydUZc8gBBs0+i6Lssy9xfXjpdlWd/39k/vF92iUtf1jl+Dk3vP+phxBU10xVawdxhAph1A4g02d5fEY1up5CdXJvyllbIswyOsA39KdHl1Xctv92x7wOivgJ6RFQydK8YAErrwASTeYItzHFysVKM/syk/SL1MAaZFsGE+DCChCx9ACLbnWeZnnbf9EvfLfqF7mfmH3QfIBBvmwwDiYQA5s2DL87yqKvfnle30a1mWeZ5rrb1DErnLPTGv6zrP8zRNi6Louq4oiizL3HuLorD/ui+dZZlSKs/zPM/d4sktSZKEBbavbh8vV3SzLKvrWmuttQ7f6Y69+NyOUZalUuqQpik1KQWTMkgV2QeElS9vR6p9tGBaa7l39G2eEYItZgwg4bMufACJK9j6vi+eSGtz91CWZcYY+b/8zrL9f5qmNvDTNLVztXmeu08py9K+aFEU0p6GYSjLUg5k2rZ16zdNU2+Pjja+bXfJjrTv0R4rGWOSJLF3uQW2ZbPF3vsqu7Vte/jEetM07tt3D+62Vb4wxoTtMk1TO0YQbJgPAwgDSFiSiILNvdF7GxL17i12D3mHJ9LghqCRdV3n/ilN3ytJ3/fu0USapl77OLxdei83OK3c24vhq0zYLp/LFky+S1T+v6PyRdguvSbOVCTmwwDCAOI5m2BzT/ZFkiSym733XFWV1EhZlkmSFA63NrfVlMwtyNHZMe3SHsRZWms54jukXU41k/BceZ5LId2GuKPyRdgu7ehg/yTYMBMGEAYQz9kEW5qmYdXI7tzWLmWGYduLjtaUHCa4kxIvbpdFUYTtUl5xb7vcdvrvTkfMxB6lupWzo/LFaLv0joIJNsyEAYQBxHM2weZePhXbZhLshVlvJmEYBncmerSmsixzLx0f0y7DVz98JmHYcmAVXtmeg1zydY+ndlS+GJ1JcLsWwYb5MIAwgHjiDbaQe6zhLlLyDm3cS6l2ic4wDMYY96hhW7t0rw9Li/EOPeRwLPwo5ei1X9vgjDH2zPqQdimrqtxb5LsJhmeS6ZRnLdgdPVDdVvli27VfuyPSNPUm2c8LwRYzBhAGEM85BdswDEVR1HVdlqXbLKRdyl1aa28fFE+Ll+xultW6sjLVW3s6PK1EkqqXM3dvLlhWoHoLeWX5r10l5b56VVVVVdlXd1frDs4a2fBT91pr90bvzwPVdR0umtpNLhKEt49Wvl2tK5XpPlHeqdwoS5bj/DKIQxBsMWMAYQDxnFmwjTr3aa4d7GGO1xqwMIItZgwg21zsAHL2wdb3vaT6+Z4N7CbHSgvMjGMHgi1mDCA7XOYAsoZgM8YYY9baLhEDgi1mDCDwnH2wAQugicaMvQMPwQbsRxONGXsHHoIN2I8mGjP2DjwEG7AfTTRm7B14CDZgP5pozNg78EQUbJvNpgGidHd3x9AZrYYBBD+bvMO+JNi+fPmigOh9/Phxqn6CCTGAYNSEHfYlwTYMw/39/TsgYnd3dz9+/Jiqn2BaDCDwTNthXxhsAADEiWADAKwKwQYAWBWCDQCwKgQbAGBVCDYAwKoQbACAVSHYAACrQrABAFaFYAMArArBBgBYFYINALAq/wOMzuk9I1iACwAAAABJRU5ErkJggg==" alt="" /></p>
+<p>　　在代理模式中的角色：</p>
+<p>　　●　　<strong>抽象对象角色：</strong>声明了目标对象和代理对象的共同接口，这样一来在任何可以使用目标对象的地方都可以使用代理对象。</p>
+<p>　　●　　<strong>目标对象角色：</strong>定义了代理对象所代表的目标对象。</p>
+<p>　　●　　<strong>代理对象角色：</strong>代理对象内部含有目标对象的引用，从而可以在任何时候操作目标对象；代理对象提供一个与目标对象相同的接口，以便可以在任何时候替代目标对象。代理对象通常在客户端调用传递给目标对象之前或之后，执行某个操作，而不是单纯地将调用传递给目标对象。</p>
+<h3>源代码</h3>
+<p>　　抽象对象角色</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> AbstractObject {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">操作</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation();
+}</span></pre>
+</div>
+<p>　　目标对象角色</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> RealObject <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractObject {
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">一些操作</span>
+        System.out.println("一些操作"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>　　代理对象角色</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ProxyObject <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractObject{
+    RealObject realObject </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> RealObject();
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">调用目标对象之前可以做相关操作</span>
+        System.out.println("before"<span style="color: #000000;">);        
+        realObject.operation();        
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">调用目标对象之后可以做相关操作</span>
+        System.out.println("after"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>　　客户端</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Client {
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> TODO Auto-generated method stub</span>
+        AbstractObject obj = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ProxyObject();
+        obj.operation();
+    }
+
+}</span></pre>
+</div>
+<p>　　从上面的例子可以看出代理对象将客户端的调用委派给目标对象，在调用目标对象的方法之前跟之后都可以执行特定的操作。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		<p class="postfoot">
+			posted on <span id="post-date">2012-04-23 17:20</span> <a href='http://www.cnblogs.com/java-my-life/'>java_my_life</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2466712" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2466712);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=106378,cb_entryId=2466712,cb_blogApp=currentBlogApp,cb_blogUserGuid='739a0020-f8db-df11-ac81-842b2b196315',cb_entryCreatedDate='2012/4/23 17:20:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+			<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/java-my-life/">首页</a></li>
+			<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+			<li><a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/java_my_life">联系</a></li>
+			<li><a id="blog_nav_rss" href="http://www.cnblogs.com/java-my-life/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/java-my-life/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+			<li><a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div id="blog_stats">
+<h3>统计</h3>
+	<ul>
+		<li>随笔 - 28
+		<li>文章 - 0
+		<li>评论 - 306
+		<li>引用 - 0
+	</li>
+</ul></div>
+		
+<div class="newsItem">
+<h3>公告</h3>
+<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+		<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>			
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; java_my_life
+</p>
+	
+
+</body>
+</html>

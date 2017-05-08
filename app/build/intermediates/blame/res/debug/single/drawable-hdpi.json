@@ -1,18 +1,34 @@
 [
     {
-        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\back.png",
-        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\back.png"
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\leaf_left.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\leaf_left.png"
     },
     {
-        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\left_back_pressed.png",
-        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\left_back_pressed.png"
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\back.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\back.png"
     },
     {
-        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
-        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\workspaceAS\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\left_back_normal.png",
-        "source": "D:\\workspaceAS\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\left_back_normal.png"
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\leaf_left_65.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\leaf_left_65.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\leaf_right.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\leaf_right.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\left_back_normal.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\left_back_normal.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\leaf_right_65.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\leaf_right_65.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\left_back_pressed.png",
+        "source": "D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\res\\drawable-hdpi\\left_back_pressed.png"
     }
 ]

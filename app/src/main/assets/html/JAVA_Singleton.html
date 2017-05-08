@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《JAVA与模式》之单例模式 - java_my_life - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Rdf1BBttS5_qVaET1myrajVTd62BSCCoJA9fZxGv1ZM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky.css?v=E5nb-2VXXOM_tQ5C4utQQ0Z99gTEPCsZc1RYEu9I_lQ1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky-mobile.css?v=XL4MXhlogY9JJAkggOx9KqKMgdh3EEskqZBkYsbuZhE1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/java-my-life/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/java-my-life/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/java-my-life/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'java-my-life', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/java-my-life/">java_my_life</a></h1>
+<p id="tagline"></p>
+<div id="rigthtag">&nbsp;</div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/java-my-life/archive/2012/03/31/2425631.html">《JAVA与模式》之单例模式</a>
+		</h2>
+		<div id="cnblogs_post_body"><p>在阎宏博士的《JAVA与模式》一书中开头是这样描述单例模式的：</p>
+<p>　　<strong>作为对象的创建模式，单例模式确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。这个类称为单例类。</strong></p>
+<hr />
+<h1>单例模式的结构<strong></strong></h1>
+<h3><strong>　　单例模式的特点：</strong></h3>
+<ul>
+<li>单例类只能有一个实例。</li>
+<li>单例类必须自己创建自己的唯一实例。</li>
+<li>单例类必须给所有其他对象提供这一实例。</li>
+</ul>
+<h3><span style="background-color: #c0c0c0;">　　饿汉式单例类</span></h3>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> EagerSingleton {<br />    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> EagerSingleton instance = <span style="color: #0000ff;">new</span> EagerSingleton();<br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * 私有默认构造子<br />     </span><span style="color: #008000;">*/</span><br />    <span style="color: #0000ff;">private</span> EagerSingleton(){}<br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * 静态工厂方法<br />     </span><span style="color: #008000;">*/</span><br />    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> EagerSingleton getInstance(){<br />        <span style="color: #0000ff;">return</span> instance;<br />    }<br />}</pre>
+</div>
+<p>　　上面的例子中，在这个类被加载时，静态变量instance会被初始化，此时类的私有构造子会被调用。这时候，单例类的唯一实例就被创建出来了。</p>
+<p>　　饿汉式其实是一种比较形象的称谓。既然饿，那么在创建对象实例的时候就比较着急，饿了嘛，于是在装载类的时候就创建对象实例。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> EagerSingleton instance = <span style="color: #0000ff;">new</span> EagerSingleton();</pre>
+</div>
+<p>　　<strong>饿汉式是典型的空间换时间</strong>，当类装载的时候就会创建类的实例，不管你用不用，先创建出来，然后每次调用的时候，就不需要再判断，节省了运行时间。</p>
+<p>&nbsp;</p>
+<h3><span style="background-color: #c0c0c0;">　　懒汉式单例类</span></h3>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> LazySingleton {<br />    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> LazySingleton instance = <span style="color: #0000ff;">null</span>;<br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * 私有默认构造子<br />     </span><span style="color: #008000;">*/</span><br />    <span style="color: #0000ff;">private</span> LazySingleton(){}<br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * 静态工厂方法<br />     </span><span style="color: #008000;">*/</span><br />    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">synchronized</span> LazySingleton getInstance(){<br />        <span style="color: #0000ff;">if</span>(instance == <span style="color: #0000ff;">null</span>){<br />            instance = <span style="color: #0000ff;">new</span> LazySingleton();<br />        }<br />        <span style="color: #0000ff;">return</span> instance;<br />    }<br />}</pre>
+</div>
+<p>　　上面的懒汉式单例类实现里对静态工厂方法使用了同步化，以处理多线程环境。<br />　　懒汉式其实是一种比较形象的称谓。既然懒，那么在创建对象实例的时候就不着急。会一直等到马上要使用对象实例的时候才会创建，懒人嘛，总是推脱不开的时候才会真正去执行工作，因此在装载对象的时候不创建对象实例。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> LazySingleton instance = <span style="color: #0000ff;">null</span>;</pre>
+</div>
+<p>　　<strong>懒汉式是典型的时间换空间</strong>,就是每次获取实例都会进行判断，看是否需要创建实例，浪费判断的时间。当然，如果一直没有人使用的话，那就不会创建实例，则节约内存空间</p>
+<p>　　由于懒汉式的实现是线程安全的，这样会降低整个访问的速度，而且每次都要判断。那么有没有更好的方式实现呢？</p>
+<h3>　&nbsp;</h3>
+<h3><span style="background-color: #c0c0c0;">　　双重检查加锁</span></h3>
+<p>　　可以使用&ldquo;双重检查加锁&rdquo;的方式来实现，就可以既实现线程安全，又能够使性能不受很大的影响。那么什么是&ldquo;双重检查加锁&rdquo;机制呢？</p>
+<p>　　所谓&ldquo;双重检查加锁&rdquo;机制，指的是：并不是每次进入getInstance方法都需要同步，而是先不同步，进入方法后，先检查实例是否存在，如果不存在才进行下面的同步块，这是第一重检查，进入同步块过后，再次检查实例是否存在，如果不存在，就在同步的情况下创建一个实例，这是第二重检查。这样一来，就只需要同步一次了，从而减少了多次在同步情况下进行判断所浪费的时间。</p>
+<p>　　&ldquo;双重检查加锁&rdquo;机制的实现会使用关键字<span style="color: #800080;">volatile<span style="color: #999999;">，<span style="color: #000000;">它的意思是：被<span style="color: #800080;">volatile</span>修饰的变量的值，将不会被本地线程缓存，所有对该变量的读写都是直接操作共享内存，从而确保多个线程能正确的处理该变量。</span></span></span></p>
+<p><span style="color: #ff0000;"><strong>　　注意：在java1.4及以前版本中，很多JVM对于volatile关键字的实现的问题，会导致&ldquo;双重检查加锁&rdquo;的失败，因此&ldquo;双重检查加锁&rdquo;机制只只能用在java5及以上的版本。</strong></span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Singleton {<br />    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">volatile</span> <span style="color: #0000ff;">static</span> Singleton instance = <span style="color: #0000ff;">null</span>;<br />    <span style="color: #0000ff;">private</span> Singleton(){}<br />    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> Singleton getInstance(){<br />        <span style="color: #008000;">//</span><span style="color: #008000;">先检查实例是否存在，如果不存在才进入下面的同步块</span><span style="color: #008000;"><br /></span>        <span style="color: #0000ff;">if</span>(instance == <span style="color: #0000ff;">null</span>){<br />            <span style="color: #008000;">//</span><span style="color: #008000;">同步块，线程安全的创建实例</span><span style="color: #008000;"><br /></span>            <span style="color: #0000ff;">synchronized</span> (Singleton.<span style="color: #0000ff;">class</span>) {<br />                <span style="color: #008000;">//</span><span style="color: #008000;">再次检查实例是否存在，如果不存在才真正的创建实例</span><span style="color: #008000;"><br /></span>                <span style="color: #0000ff;">if</span>(instance == <span style="color: #0000ff;">null</span>){<br />                    instance = <span style="color: #0000ff;">new</span> Singleton();<br />                }<br />            }<br />        }<br />        <span style="color: #0000ff;">return</span> instance;<br />    }<br />}</pre>
+</div>
+<p>　　这种实现方式既可以实现线程安全地创建实例，而又不会对性能造成太大的影响。它只是第一次创建实例的时候同步，以后就不需要同步了，从而加快了运行速度。</p>
+<p>　　<span style="color: #0000ff;">提示</span>：<span style="color: #0000ff;">由于volatile关键字可能会屏蔽掉虚拟机中一些必要的代码优化，所以运行效率并不是很高。因此一般建议，没有特别的需要，不要使用。也就是说，虽然可以使用&ldquo;双重检查加锁&rdquo;机制来实现线程安全的单例，但并不建议大量采用，可以根据情况来选用。</span></p>
+<p><span style="color: #000000;">　　根据上面的分析，常见的两种单例实现方式都存在小小的缺陷，那么有没有一种方案，既能实现延迟加载，又能实现线程安全呢？</span></p>
+<p><span style="color: #000000;">　　</span></p>
+<h3><span style="color: #000000; background-color: #c0c0c0;">　　Lazy initialization holder class模式</span></h3>
+<p><span style="color: #000000;">　　这个模式综合使用了Java的类级内部类和多线程缺省同步锁的知识，很巧妙地同时实现了延迟加载和线程安全。</span></p>
+<h3><span style="color: #000000;">　　1.相应的基础知识</span></h3>
+<ul>
+<li><span style="color: #000000;">　什么是类级内部类？</span></li>
+</ul>
+<p><strong><span style="color: #000000;">　　简单点说，类级内部类指的是，有static修饰的成员式内部类。如果没有static修饰的成员式内部类被称为对象级内部类。</span></strong></p>
+<p><strong><span style="color: #000000;">　　类级内部类相当于其外部类的static成分，它的对象与外部类对象间不存在依赖关系，因此可直接创建。而对象级内部类的实例，是绑定在外部对象实例中的。</span></strong></p>
+<p><strong><span style="color: #000000;">　　类级内部类中，可以定义静态的方法。在静态方法中只能够引用外部类中的静态成员方法或者成员变量。</span></strong></p>
+<p><strong><span style="color: #000000;">　　类级内部类相当于其外部类的成员，只有在第一次被使用的时候才被会装载。</span></strong></p>
+<ul>
+<li style="color: #000000;">　多线程缺省同步锁的知识</li>
+</ul>
+<p><strong>　　大家都知道，在多线程开发中，为了解决并发问题，主要是通过使用synchronized来加互斥锁进行同步控制。但是在某些情况中，JVM已经隐含地为您执行了同步，这些情况下就不用自己再来进行同步控制了。这些情况包括：</strong></p>
+<p>　　1.由静态初始化器（在静态字段上或static{}块中的初始化器）初始化数据时</p>
+<p>　　2.访问final字段时</p>
+<p>　　3.在创建线程之前创建对象时</p>
+<p>　　4.线程可以看见它将要处理的对象时</p>
+<h3><span style="color: #000000;">　　2.解决方案的思路</span></h3>
+<p><span style="color: #000000;">　　要想很简单地实现线程安全，可以采用静态初始化器的方式，它可以由JVM来保证线程的安全性。比如前面的饿汉式实现方式。但是这样一来，不是会浪费一定的空间吗？因为这种实现方式，会在类装载的时候就初始化对象，不管你需不需要。</span></p>
+<p><span style="color: #000000;">　　如果现在有一种方法能够让类装载的时候不去初始化对象，那不就解决问题了？一种可行的方式就是采用类级内部类，在这个类级内部类里面去创建对象实例。这样一来，只要不使用到这个类级内部类，那就不会创建对象实例，从而同时实现延迟加载和线程安全。</span></p>
+<p><span style="color: #000000;">　　示例代码如下：</span></p>
+<p><span style="color: #000000;">　　</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Singleton {<br />    <br />    <span style="color: #0000ff;">private</span> Singleton(){}<br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     *    类级的内部类，也就是静态的成员式内部类，该内部类的实例与外部类的实例<br />     *    没有绑定关系，而且只有被调用到时才会装载，从而实现了延迟加载。<br />     </span><span style="color: #008000;">*/</span><br />    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span> SingletonHolder{<br />        <span style="color: #008000;">/**</span><span style="color: #008000;"><br />         * 静态初始化器，由JVM来保证线程安全<br />         </span><span style="color: #008000;">*/</span><br />        <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> Singleton instance = <span style="color: #0000ff;">new</span> Singleton();<br />    }<br />    <br />    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> Singleton getInstance(){<br />        <span style="color: #0000ff;">return</span> SingletonHolder.instance;<br />    }<br />}</pre>
+</div>
+<p><span style="color: #000000;">　　当getInstance方法第一次被调用的时候，它第一次读取SingletonHolder.instance，导致SingletonHolder类得到初始化；而这个类在装载并被初始化的时候，会初始化它的静态域，从而创建Singleton的实例，由于是静态的域，因此只会在虚拟机装载类的时候初始化一次，并由虚拟机来保证它的线程安全性。</span></p>
+<p><span style="color: #000000;">　　这个模式的优势在于，getInstance方法并没有被同步，并且只是执行一个域的访问，因此延迟初始化并没有增加任何访问成本。</span></p>
+<p><span style="color: #000000;">　　</span></p>
+<h3><span style="color: #000000; background-color: #c0c0c0;">　　单例和枚举</span></h3>
+<p><span style="color: #000000;">　　按照《高效Java 第二版》中的说法：单元素的枚举类型已经成为实现Singleton的最佳方法。用枚举来实现单例非常简单，只需要编写一个包含单个元素的枚举类型即可。</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">enum</span> Singleton {<br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * 定义一个枚举的元素，它就代表了Singleton的一个实例。<br />     </span><span style="color: #008000;">*/</span><br />    <br />    uniqueInstance;<br />    <br />    <span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * 单例可以有自己的操作<br />     </span><span style="color: #008000;">*/</span><br />    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> singletonOperation(){<br />        <span style="color: #008000;">//</span><span style="color: #008000;">功能处理</span><span style="color: #008000;"><br /></span>    }<br />}</pre>
+</div>
+<p><span style="color: #000000;">　　使用枚举来实现单实例控制会更加简洁，而且无偿地提供了序列化机制，并由JVM从根本上提供保障，绝对防止多次实例化，是更简洁、高效、安全的实现单例的方式。</span></p>
+<p>　　</p>
+<hr />
+<h1><span style="background-color: #c0c0c0;">完结</span></h1>
+<p>　　</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		<p class="postfoot">
+			posted on <span id="post-date">2012-03-31 22:42</span> <a href='http://www.cnblogs.com/java-my-life/'>java_my_life</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2425631" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2425631);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=106378,cb_entryId=2425631,cb_blogApp=currentBlogApp,cb_blogUserGuid='739a0020-f8db-df11-ac81-842b2b196315',cb_entryCreatedDate='2012/3/31 22:42:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+			<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/java-my-life/">首页</a></li>
+			<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+			<li><a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/java_my_life">联系</a></li>
+			<li><a id="blog_nav_rss" href="http://www.cnblogs.com/java-my-life/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/java-my-life/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+			<li><a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div id="blog_stats">
+<h3>统计</h3>
+	<ul>
+		<li>随笔 - 28
+		<li>文章 - 0
+		<li>评论 - 306
+		<li>引用 - 0
+	</li>
+</ul></div>
+		
+<div class="newsItem">
+<h3>公告</h3>
+<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+		<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>			
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; java_my_life
+</p>
+	
+
+</body>
+</html>

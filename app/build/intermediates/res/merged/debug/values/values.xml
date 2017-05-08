@@ -333,8 +333,9 @@
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="hello_world">Hello world!</string>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <string name="title_activity_study">StudyActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_design">设计模式</string>
+    <string name="title_activity_study">学习</string>
+    <string name="title_activity_test">测试</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>

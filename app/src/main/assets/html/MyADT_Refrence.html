@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<p>MyADT使用文档</p>
+<p>为方便android项目开发调试，特开发此app及相关的测试程序和javafx电脑端监控后台。</p>
+<p>功能：对加入MyADT.jar的app程序实现log的输出，可以在手机版MyADT或javafx后台查看或保存log信息。</p>
+<p>  对app未知异常的捕获与上传。</p>
+<p>支持远程app推送更新。</p>
+<p>更多功能请自行体验，开发还在继续...</p>
+<p>感谢</p>
+<p>使用方法</p>
+<p>1. 在android项目中引入MyADT.jar</p>
+<p>2. 在application初始化中初始化：</p>
+<p>MyLog myLog = new MyLog(this);//传入参数context<br />
+myLog.initialization(); </p>
+<p>3.在需要打印log的地方添加如下代码：</p>
+<p>MyLog.d(&quot;要打印的内容&quot;);</p>
+<p>经过以上步骤就可以实现MyADT的log打印了。程序中异常问题会自动被捕获。</p>
+</body>
+</html>

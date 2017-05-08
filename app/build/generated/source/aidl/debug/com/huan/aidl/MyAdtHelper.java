@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\workspaceAS\\MyADT\\app\\src\\main\\aidl\\com\\huan\\aidl\\MyAdtHelper.aidl
+ * Original file: D:\\Android\\AndroidStudioProjects\\MyADT\\app\\src\\main\\aidl\\com\\huan\\aidl\\MyAdtHelper.aidl
  */
 package com.huan.aidl;
 //MyADT_AIDL

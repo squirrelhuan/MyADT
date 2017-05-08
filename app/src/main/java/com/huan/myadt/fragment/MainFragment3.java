@@ -1,5 +1,6 @@
 package com.huan.myadt.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.huan.myadt.R;
+import com.huan.myadt.activity.DesignActivity;
 import com.huan.myadt.activity.LearnWebActivity;
 import com.huan.myadt.activity.MainActivity;
 import com.huan.myadt.activity.MarkdownActivity;
@@ -21,14 +24,15 @@ import com.huan.myadt.utils.IntentUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment3 extends BaseFragment implements OnItemClickListener,View.OnClickListener {
+public class MainFragment3 extends BaseFragment implements View.OnClickListener {
 
 	MainActivity mainActivity;
-	MySimpleListAdapter adapter;
 
 
-	ListView listView;
-	List<String> items = new ArrayList<String>();
+	private TextView tv_study;
+	private TextView tv_test;
+	private TextView tv_design;
+	private TextView tv_demo;
 
 	@Override
 	public View setContentUI(LayoutInflater inflater, ViewGroup container) {
@@ -40,60 +44,41 @@ public class MainFragment3 extends BaseFragment implements OnItemClickListener,V
 	}
 	@Override
 	public void init() {
-		items.add("SimpleFactory模式");
-		items.add("FactoryMethod模式");
-		items.add("AbstractFactory模式");
-		items.add("Singleton模式");
-		items.add("Builder模式");
-		items.add("Prototype模式");
-		items.add("Adapter模式");
-		items.add("Composite模式");
-		items.add("Decorator模式");
-		items.add("Proxy模式");
-		items.add("Flyweight模式");
-		items.add("Facade模式");
-		items.add("Bridge模式");
-		items.add("Immutable模式");
-		items.add("Strategy模式");
-		items.add("TemplateMethod模式");
-		items.add("Objserver模式");
-		items.add("Iterator模式");
-		items.add("ChainOfResponsibility模式");
-		items.add("Command模式");
-		items.add("Memento模式");
-		items.add("State模式");
-		items.add("Visitor模式");
-		items.add("Interpreter模式");
-		items.add("Mediator模式");
-		mainActivity = (MainActivity) getActivity();
-		listView = (ListView) findViewById(R.id.list_view);
-		adapter = new MySimpleListAdapter(getActivity(), items);
-		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(this);
 
-		LinearLayout ll_study = (LinearLayout) findViewById(R.id.ll_study);
-		ll_study.setOnClickListener(this);
-		LinearLayout ll_test = (LinearLayout) findViewById(R.id.ll_test);
-		ll_test.setOnClickListener(this);
+		mainActivity = (MainActivity) getActivity();
+
+
+		tv_study = (TextView)findViewById(R.id.tv_study);
+		tv_study.setOnClickListener(this);
+		tv_test = (TextView)findViewById(R.id.tv_test);
+		tv_test.setOnClickListener(this);
+		tv_design = (TextView)findViewById(R.id.tv_design);
+		tv_design.setOnClickListener(this);
+		tv_demo = (TextView)findViewById(R.id.tv_demo);
+		tv_demo.setOnClickListener(this);
+
 	}
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-		Bundle bundle = new Bundle();
-		bundle.putString("Title", items.get(arg2));
-		IntentUtil.jump(getActivity(), LearnWebActivity.class, bundle);
-	}
+
 
 
 	@Override
 	public void onClick(View v) {
 
+		Bundle bundle = new Bundle();
 		switch (v.getId()) {
-			case R.id.ll_study:
-				IntentUtil.jump(getActivity(), MarkdownActivity.class, null);
+			case R.id.tv_study:
+				bundle.putInt("StudyType",1);
+				IntentUtil.jump(getActivity(), TestActivity.class, bundle);
 				break;
-			case R.id.ll_test:
-				IntentUtil.jump(getActivity(), TestActivity.class, null);
+			case R.id.tv_test:
+				bundle.putInt("StudyType",0);
+				IntentUtil.jump(getActivity(), TestActivity.class, bundle);
+				break;
+			case R.id.tv_design:
+				IntentUtil.jump(getActivity(), DesignActivity.class, null);
+				break;
+			case R.id.tv_demo:
+				IntentUtil.jump(getActivity(), MarkdownActivity.class, null);
 				break;
 			default:
 				break;

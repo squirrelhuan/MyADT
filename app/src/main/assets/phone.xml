@@ -1,0 +1,80 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<dics>
+
+    <table id="BUSSINESS" >
+
+        <field id="TYPE" >
+
+            <row>
+
+                <value>
+[CDATA[01]]>
+                </value>
+
+                <desc>
+<![CDATA[空运进口]]></desc>
+            </row>
+
+            <row>
+
+                <value>
+<![CDATA[02]]></value>
+
+                <desc>
+<![CDATA[空运出口]]></desc>
+            </row>
+        </field>
+
+        <field id="AB" >
+
+            <row>
+
+                <value>
+<![CDATA[1]]></value>
+
+                <desc>
+<![CDATA[进口]]></desc>
+            </row>
+
+            <row>
+
+                <value>
+<![CDATA[2]]></value>
+
+                <desc>
+<![CDATA[出口]]></desc>
+            </row>
+        </field>
+    </table>
+
+    <table id="TRADE" >
+
+        <field id="TYPE" >
+
+            <row>
+
+                <value>
+<![CDATA[11]]></value>
+
+                <desc>
+<![CDATA[一般贸易]]></desc>
+            </row>
+
+            <row>
+
+                <value>
+<![CDATA[12]]></value>
+
+                <desc>
+
+<![CDATA[易货贸易]]
+                   
+
+                    <desc>
+                    </desc>
+                </value>
+            </row>
+        </field>
+    </table>
+
+</dics>]]>

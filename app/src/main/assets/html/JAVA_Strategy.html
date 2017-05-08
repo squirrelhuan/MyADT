@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《JAVA与模式》之策略模式 - java_my_life - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Rdf1BBttS5_qVaET1myrajVTd62BSCCoJA9fZxGv1ZM1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky.css?v=E5nb-2VXXOM_tQ5C4utQQ0Z99gTEPCsZc1RYEu9I_lQ1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/GreenGrassBlueSky/bundle-GreenGrassBlueSky-mobile.css?v=XL4MXhlogY9JJAkggOx9KqKMgdh3EEskqZBkYsbuZhE1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/java-my-life/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/java-my-life/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/java-my-life/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'java-my-life', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/java-my-life/">java_my_life</a></h1>
+<p id="tagline"></p>
+<div id="rigthtag">&nbsp;</div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/java-my-life/archive/2012/05/10/2491891.html">《JAVA与模式》之策略模式</a>
+		</h2>
+		<div id="cnblogs_post_body"><p>在阎宏博士的《JAVA与模式》一书中开头是这样描述策略（Strategy）模式的：</p>
+<p>　　<strong>策略模式属于对象的行为模式。其用意是针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。</strong></p>
+<hr />
+<h1><span style="font-size: 18pt;">策略模式的结构</span><strong><br /></strong></h1>
+<p>　　策略模式是对算法的包装，是把使用算法的责任和算法本身分割开来，委派给不同的对象管理。策略模式通常把一个系列的算法包装到一系列的策略类里面，作为一个抽象策略类的子类。用一句话来说，就是：&ldquo;准备一组算法，并将每一个算法封装起来，使得它们可以互换&rdquo;。下面就以一个示意性的实现讲解策略模式实例的结构。</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAxsAAAD5CAIAAADA2L+KAAAgAElEQVR4nO3dMcjsWP3/8akebiNelGVXBPeKBgRBrthYpFgEwWILYyGWF9IINiIptNoqaCM2EbGQW6SwsFhSbbWktAks2Eiq7XK3s0hxy/yK7//5/r97kknyTCaTk8z7VSx358lkMpNvTj45OUlOHQAAAJY5bb0AAAAAu0eiAgAAWIpEBQAAsBSJCgAAYCkSFQAAwFIkKgAAgKVIVAAAAEuRqAAAAJYiUQEAACxFogIAAFiKRAUAALAUiQoAAGApEhUAAMBSJCoAAIClSFQAAABLkagAAACWmpWoXr58eQKWefny5drVDADAVmYlqtOJriwsRRUBAA6MRIUboYoAAAdGosKNUEUAgAMjUeFGqCIAwIGRqHAjVBEA4MBIVLgRqggAcGAkqq7rurqu67reeikO7vBVBAC4ZySqLoqiJEnSNA2CIMuyrRfnsI5dRQCAO3fviSqKIk1RZVnGcXzBTJIkWbIMZVlWVbVkDrtw4CoCAOCuE1Vd10EQ2FeKohiZvm3bwRfDMFyyGHEck6gAANi1u05UaZqeC0NJkoRhGEVRmqZd19V1HYZhHMdRFMnrMpm8cjqdoiiKokgHYxVFET3SKYMgCMMwy7IgCOT1PM+jKJLXoyjK83z177ydo1YRAAAdiWowUcmwKvl3HMcSdGRi6aYKw9D2KjkdXU3T6GyzLNNQJf9umkZfEc7cjuqoVQQAQEeiGkxUQRBoxCnLUqZJ01RjVhiG+u+ul6jSNJUTeVVV5Xlu/xqGYRiGTdPY6UlU2ARPQMdKeCw67tNdJyo5AWdfkWRjX6yqSv73SYlKThcq/VOSJEEQOOOxSFTYBGsEK6G0cJ/uOlE1TRMEgfYYNU0j1/rZPioZ6tTNS1QysN2e6evMaPe6ruM4TpLEuaJQE1VZllf/jv44ahXtF2sEK6G0cJ/uOlF1jyPQm6aR4U2SrvI8lyFTMiJKxpsnSaJ3SXASVRiGeZ6XZakv6q2tsiyTF+WSwKZp2rYNgsBeVCgxS/PcUR24inaKNYKVUFq4T/eeqLquy/NcM42+KPemSpJE4lTbttJH1batJCf5t0wsnU/27qBN08i5P718T95SlmX/7d1jXHPGVx3Msatoj1gjWAmlhftEosKNUEW+2d0aKYqi/7Qo58WiKBbeH26+LMuKokjT9CrPsCqKoj+ecvBF/+2utICrIFHhRqgi3+xrjcwPHDOfJbUwBuV5Lufui6K41tOrDhOq9lVawLWQqHAjVJFvdrRG1ogaCx8elabpGkHnGKFqR6UFXBGJCjdCFflmL2tkfsgoyzJJEnulrQyILIrCXllS17XcOaUoiqIo7IjGLMuSJNE+J5nSPuFALi4pikKGTtpzjnVdp2lq327naa9l6X/QZd/XW3spLeC6SFS4EarIN7tYI0VR9O8qMviiqKrKGUelN0NxTs85jy7ouk4vtrXX7XZdJw+P6rouSRKNNf0+Kp1hVVX69iRJZFGrqtIJdD5t2/YXo+u6LMv616kMvuinXZQWcHUkKtwIVeSbvayRwbuKnLvVSD9RDQadrpeonL/amTi38BX9RCVxp6oq2yNl56O9Wfaj+w9RkDn0v9fC05S3tJfSAq6LRIUboYp8s6M1Mj9ULUlUcn5QjEwp+olKg5R+UH9hRBiG9oPsaccDxKluV6UFXBGJCjdCFflmX2tkZqi6IFFJoHFSi005cxKVDOHqf5BdGJ3nufs7HCNOdXsrLeBaZtX9w8PD9Z+liTvz8PCwdjXjSU572+3NCVXzE1Ucx3K6TR9gEEWRDm/Se/N2sxOVLon0PMlsdRxVZ27rkCSJzl9fPEyc6nZYWsBV0EeFG6GKfLPHNTJ4vZu+WJalphnpEJIx5jKAqX+KLcsym5y6x8dG2Wdx6gyd+4imaaq3pBJ5nsuUTdNkWabTy2V9dko7sZ1n/6sNvui/PZYWsByJCjdCFfmGNYKVUFq4TyQq3AhV5BvWCFZCaeE+kaieZkc32fMNVeQb1ghWQmnhPpGo5iqKIs/zqqryPL/Zo1iPhCryDWsEK6G0cJ9WTFTnbmo831We6H4t9nof54ESzuDWp1r49r2gkfUNawQrobRwn1ZMVIOXOtsLbcZlWXazU2xzotu5fqlzz5GYaeHbd4RG1jesEayE0sJ9ukKikqdlpWkqdxzuuq6u6zzPnQeRyh3w5ILhNE01oMhVxEKSjTyINIoi50Gk3eNdie2dYOTppPKAUvlr27ayMG3b1nUdx/Fkb1kQBJMdRfIEVud5EXJttt4BWX8QubFNnuf2ua268HqDmcG3d483zrFT2h8qjmOZf1mWURTJG+Wv8wPr7dHI+ubYa0Q2rrIsverqvhPHLi3gnCckKk0tSuKF7vXbth1/EKk8K1TCkE557v57gw8i1cSg79J/lGU5+OnOGbpBM9tcSTD9XNX/pjYMSVazXW7O9P236ytN02hXn01musD678GH2HuFRtY3B14jcRzLFpdlmfNUvoVHHT4ftPjjwKUFjLhCH5Wkq34oGUxUg6cCy7LM8zyO48lEpf8Ow1A+0QayfqJa4wi1KIpzN2VWcvc/58WmafI87zfx409s1YltRtQvVde1RDf/b6xMI+ubo66Ruq7tFqr3Ru+6rmmaOYdYI849oRnWUUsLGHedcVRyck1TjhhMVP3mLIoiOSs32Ucl8xf6JzmH2H9Wg6S0K+YMe2wqwch+BWfi/sLbhRnvo5Lv0v+mktLkXIbzdslqF36xW5msotevX3/wwQevX7++yeLgsLu9qqqCIOh3JskRXZIkVVVpS1VVlZxA73r3RrGTdY/3Tw+CQN5ip2yapj/oU1+s61pGIOgb5R8H7u46amkB466QqLQpcQZZ294j/Uf/Kjl95Vyi0kbNHnfqi3IacbBtiqJo5vHonKbNzirP88HHfulSDcbB/vSDb5d4qn+15woHh+rLMy4ml39zI1X0+vXrFy9evHr1qizLV69evXjxglx1gVevXv3617/+5JNPZk5/4N1eFEVBENjDHhleKWft0zSVP8mLQRDI2ER5V9d1eZ7LZEmS6JYro0WDIJDhjNpoJEki/ethGOoWal8MwzBJEumclo1dZrv8amhvHbi0gBFXSFRhGOrD251IVJZl0zTacPR7kpqm0TwhyUCTinbG6JBt7eaRx2bpp8jo7zAMnQ75wXORfW3byiD68clk/LhM73yQDPCqqkpPLjhP7Oq6TgfIy2AyO+K+/3YZBdI9PqdMX9Rv2u+mmvyamxusIs1Sn3/+ub74+eefk6su8Pnnn//tb3/72c9+9vz581evXv3zn/98+/btyPTH3u3JfeOcTVvCkDOlhB75t2x3clmMvCKdUjqxc8q+LEt9rx0PoJPZT5SY1X358cmHdOzSAs65QqKS3uw8z/vxpSxLbYyappEpncnkjJXTHaVzdnJJ0zQ2i+goIhHHsW375g+YmPM40qZp5NMHO4rk8ai6VNKr73wdiUcymfMn+3adSZ7n+mKWZbYJtj1eNrP6zKmiwSxlkasu9r///e/169e/+tWvnj179vOf//z169dv3rzpT3YPu70sy06nk24g5xJV/8Usy6TX6nQ6jSQq6ffSK3P1r3raUXqn5MWmaWTLPfwtgu+htIC+3d8zXYed2svi9DYNmy7aNdnsKPeh6B57+Py/yk9oFU1mKYtctdDHH3/86tWr995778c//vFf/vIX+5v7vF0v4Yxqspe8zExUURRpYzLeRyV3M6kM/dAoiuzNU3TOchXOom/ovaOWFjBu94mqexxAant9pD9sw0VaiXxN25u1o+cMnk6nJ2Upi1y13L///e/f/va3L168+N73vvf73//+s88+83y7vphzTbGEGPm33tbEXgXsJKqmaWxsCoLA9gHb03nd47lF/ase9gRBkCRJv0tbbtS3i07lJY5aWsC4IyQq7MIJ/tm6KNYigab/FM6yLOV2vva6GRk5bqNPGIZyOys5kWevYpaeJ3t7FBnBKTFO+8VlnuEjZ9nW++KeOHBpASNIVLiR0+m0pJ/p4v4tKOcM4IG3a7nOY/BJVjJC0U7pnLATcvsVGT3pdHj3x4zKzfDshSm2k8xeA2gHJxzYgUsLGEGiwo1IFV1w/o4stcTIKHW265XICHS54EaGrnddV9e1dHc516AcEqWF+0Siwo3YKpqZq8hSF5tzJwW261X1L/i1d0g5NkoL94lEhRvpV9FIriJLXea///3vH//4x5cvX7548WLybp9s11gJpYX7NKvuHx4ebj5kFkfz8PAwWF1OriJLXeyDDz7Q6/jmTH9it4d1UFq4T/RR4UbGq0hy1el0IkvdDNs1VkJp4T6RqHAjVJFv6HvGSs51SAPHdheJSp9AvPWC3LW9V9HxsEawEkoL9+n4iUrvhpxlGaFqQ7uuokNijWAllBbu0xUSVdM06SPfbl7nPGDYt8W7KzSyvmGN+EwetCz/3R1KC/fpkkRl7zjcdZ19FGj/KaQzLbxNy7m3O48plfsgL/kgXIxG1jesEW8VRSGHghe3qNuitHCfLklUdiPP89z+b9u2FxxU9Z8nepW353nez09OxsLN0Mj65mBrpG3boijkiXv6fL1VFUVRFMXVD9LSNNUGzXlmziaSJBk8ZC3L8lxzerDSAmZamqiiKBpMM3IqUJ6+Lq+UZSlPEk2SRJ/Q3ratPMo0y7KiKOw4pyzLkiTJssxOmaaptJt5nkt6O/f2ruviOO43BCSqrdDI+ubcGpl5ULRwVOJK57PCMJw554ULEMexzMF5EPJC/WcRbt5kjSwAiQqwnpCoJNDIY6rkH23b2oeAWjpiqSxLTWBBEMjERVFoVOq+fEwm9FHwbdvqRisf13VdlmW2Ney/XQxu7fYx8rglGlnfDK6R+b07dhO+wBrns5qmmZk/Fnb8OAM0r8W2lmrzRHVOlmXnfkY2dtynpX1Ug4nK2dL0GE6bBnmAqJ3hyGGZfbZolmXS0eUsz/xE5W3zdHg0sr4ZXCP9Pbrs5suy1MOYoijkScB6cNI0TZZl8t6yLG3YkjNxNn9Id3WSJHVd20MjmYmzk5a2oizLqqpkJvK8PJm+qio7B+ftZVnKG9M01TakruskSeTIyunDdo705IvLZHqlcNM0dV1Lu2ePzfQXcOYpM5nzYresyarrenLKtm11seXf+uvVde2sprZty7JMksTpzKvrWn6Nkc45Nnbcp1XO+jkRR7fz+YkqDMPikXSG6Z+CIHBaonOJavB1EtVWaGR9Y9dI9Ui2Gt1w9AS90yvT346kD1tOxwdB0HWdHWPkTN8/I6/zt7FG+6rjOJZ41D02DrLMTvxy9vFRFGVZ1jSN7eruhkZY6qI6U0ZRJIPE0zTVpWqaxrlqOEkS/XFsK9c/MyhxZPA3GRz36cTTETLKYnKyKIpkkZqm0Y/T5XciqZ4WUDqQI8/zkbaUjR33aWmiktFO+r9lWfYPNC/oozp39CNHUc6WfC5RycGofaXfFOJmaGR9009UGqdkg6qqyg551In7W1bXdVEU9WOKTu9ss87/2hZDGwcbJpwLimXxnO60/ik//V9ngZ3J6rq2zYJ912BD5PTldOYcYlEUOis7XGHwi4z/JmJwMOgS+ik2turXqapqJHraWDl+3pONHffpCvejiqJItnnbcNhxVP3WxElUut1qE5wkiW7J+na994Fz4q//drts9n8He9pxGzSyvumvkf4pvziO5QSffVFO2DlTDvZayX63f9zl9LsEQWD7pLUXZLAvShKVM5hSXreT2TTgLHA/ysilLdJTpYs6+DW7oeM9+WjplBrs7BHyO+g3dY7u+rNd4whQvrv+ek4Mda7ddn4ou4Tjnf1s7LhP17lnugwgsIFGrsKTdkpe0UEJ3ePQCmcAhBN3ZNu2h7l6aCh/ci4MHExLTdNo+yit8JzvizXQyPqmv0acTVj+ITtdmw8Gw1M/denc4ji2W6vT7yJBpL94mnKcHmjpKel3kPRP+Q3+u7+o53rEB0NDv39ODym7L/fHDw6TGjmi63/c1TuousdxGrpqsiyzraKzhHaRbIflZNRjY8d9Ov5TaHRA607vlXcYu66iQxpfIzY32AMYjRR2XLmTBpqm0WwhI5MG99MSlexJNxlsrnOQy4qd8DQ4YGjkxOK5U36aKmyi0s8aPLPZ9TqubKeOjOOWv+pwJTtP+zv0E6GTUZ50V63++PFzwjAcPD/Q9bKm87/2xEL/8iAHGzvu0/ETFTxBFflmfI3EcSw3Senv2uM4lpNc3eO5eBnBbXfqcRxrJ5PTxaV/0lfkHnX2RbmrZF3XVVU5FxQ7Pc1ygzqZg7y9bVtNXW3byhfR6fVL6Stypk/P08kM5V3OtW/6XfR16a2Rn0h+B0lU0vGm1z8KyY7Oi/ZH0Lw1OEr9nDlX+al+35J+d5sm5RfoP8VL1pHzA/axseM+kahwI1SRb7xdI7LP1v+1PVh1XR/1fnJyTU+3+BkSPvC2tIBVkahwI1SRb3xeIzqCW8dQS//QbR4vs5WdPhe5z+fSAtZDosKNUEW+YY1gJZQW7hOJyndyjuMAZzqoIt+wRrASSgv3iUTlNb0TT9u2c26IvKHJExZUkW9YI1gJpYX7dMxEJdeq6I37bvBx8kFXDz32whwZVnLd+T9J0zRBEAz2lsmvPf723VXR4bFGsBJKC/fpkkS18LHtgxbeyG7w7YNPcR608DHy/QcXXkX/TjybP5Rw5BapJKrdYY1gJZQW7tPS5/pdxcKrhc+9fWaikrvXXPzp3WpBpz/b8WdpbYtEtTusEayE0sJ9uk6ikudV2debppGb7Nmn0MidduVefPKiPKwmDEM5a+Y8WEZuPWenlGfXyM302rYdeXv35UQl45DkgWL2hr9yukpesWFFllNvFS0fJKFB7n0nE5dlWRRFGIbOKTlZePv1u8cH6cx5sTvznAfneYgjsiw792wN56Pli8i/9QeU5bedkXJmc/CJZrLwJKrdef78+QnzfOUrX9l6Efbk+fPnW1c3sIEnJCoJNGmayqMh9MF8+rwF+2Ry+6RkDQFBEEjEkdvM6Pz1YfIqSRJ5RR5hIS+2bSt7dOchqf23C6ePyj68wnlelRNT7OI5TweTj3buQOiECTt4S/9kn0gahqFkFxubnHN8g+HJeTL8CAlAk5PZx87bdSc/r/3xRRAE9n/jOO6vpnNOJCrs0w9/+MPvfve777///tYLAsBrS/uo5FFW8m/pNOp6z123Tw+VfzhxoR+J7O45DEMdJuX0MJ17u77RSVT6v+OJyv7VPm8hDMPBk27nnqgq3Vfyvza7aFeQXSTnebHnEtV1B7/rI9XsE6ntYjjPuHUS1fxn0XckKuzTp59++s1vfvPNmzff//73//CHP2y9OAD8tTRRSWeVM70TcfoDtycTlZ5Hk94g2yMVBIEzDv3qicp+uh26dC40OK9LT5K8y/ZL9RdSevXsZ43Mtus6OWs5uAwXk0/RX2B81dhEJQ9cG1laB4kKe/Ttb3/7z3/+c9d1n3322bvvvvvFF19svUQAPHXNPqrusfdleR/VuTFAcmrM2Xmv2kd1wethGGoE1D/ZPqru8YfqP4p1/OPiOF54UWSfPLdV19eT+qicU6LjH0Siwu78/e9/f/Hixdu3b+V/f/e73/3gBz/YdpEAeOsK96PScVQyfFtetOOo+mOSnBCjD1q3T57XWenb5Sn3MnN74q//djEzUelgJv2rjD3Xmdtveu4XcP5Xc4+cshT268tnyYvy6+mLyg5B6554k08Z7jZnSrnLlH3FjqNyRsf3E5Uss1wfMH6TTxIVdue99977+OOP9X/fvn37jW9841//+teGiwTAW9e5w6ec+7OBRtKVHaMt+UA6PPrn8qSnxHbAyEB4O75He3TkT86FgfbtMoZJ3i5zkFskSDyysxIysQ00srR5nss8dTS6c0mg/SBdHnmGvF5+qIlQPjfLMvtBOvFgN1uSJDrbJ42gctLYuP6ZRPmFnWv9+t9U3isLL1dfjnwKiQr78pvf/OZHP/qR8+Inn3zy7rvvbrI8ADx3zHumH4nEnYW37PIBVYR9+drXvvbZZ5/1X//www8//PDD2y8PAM+RqHAjVBF25Cc/+ckvf/nLwT+9efPmnXfe+c9//nPjRQLgORIVboQqwl588cUXX/3qV9+8eXNugr/+9a/cngqAg0SFG6GKsBdzbj3F7akAOEhUuBGqCLvw6aeffv3rX9c7JpzD7akAOEhUuBGqCLvwrW996x//+MecKbk9FQBr1k6OJ6piOR6eCv/96U9/+s53vjNzYm5PBcCi2wAA/p933nln8Nmd53B7KgCKRAUAXdd1v/jFL376058+9V3cngqAIFEBQNd13bNnzy47o/3s2bOtlx3A9khUADDhxHUVAKbQTADABBIVgEk0EwAwgUQFYBLNBABMIFEBmEQzAQATSFQAJtFMAMAEEhWASTQTADCBRAVgEs0EAEx4//33t14EAL4jUQEAACxFogIAAFiKRAUAALAUiQoAJjCOCsAkEhUATOBaPwCTaCYAYAKJCsAkmgkAmECiAjCJZgIAJpCoAEyimQCACSQqAJNoJgBgAokKwCSaCQCYQKICMIlmAgAmcD8qAJNIVAAAAEuRqAAAAJYiUQEAACxFogKACYyjAjCJRAUAE7jWD8AkmgkAmECiAjCJZgIAJpCoAEyimQCACSQqAJNoJgBgAokKwCSaCQCYQKICMIlmAgAmkKgATKKZAIAJ3I8KwCQSFQAAwFIkKvji5cuXJ+Ojjz7SP3300UenIUzDNEzDNEzTnwabIFHBFyeGqgAAdot9GHxBooK3OPoHMIl9GHzBTgveIu5jF2hFt0UzAQATSFTYBQp1W/z6ADCBHRV2gULdFr8+AExgR4VdoFC3xa8PXzACAN5iR4VdoFC3xa8PX9AWwFsUJ3aBQt0Wvz58QVsAb1Gc2AUKdVv8+vAFbQG8xSlp7AKt6Lb49eEL2gIAWILovy32YfAFiQoAsF/sw+ALEhUAYL/Yh8EXJCp4i5MpACaxD4Mv2GnBW8R97AKt6LZoJgBgAokKu0ChbotfHwAmsKPCLlCo2+LXB4AJ7KiwCxTqtvj14QtGAMBb7KiwCxTqtvj14QvaAniL4sQuUKjb4teHL2gL4C2KE7tAoW6LXx++oC2AtzgljV2gFd0Wvz58QVsAAEsQ/bfFPgy+IFEBAPaLfdiKXr58eQJW8PLlS+oT3rpKfVKlWNUVq1SRqFZ0otMF67hKaVGfWMkVS4sqxUrWKC2KdUW0BVgJiQo+I1HBfySqnaEtwEpIVPAZiQr+I1HtDG0BVkKigs9IVPAfiWpnaAuwEhIVfEaigv9IVDtDW4CVkKjgMxIV/Eei2plt24KyLKMoiqIoTdOqqjZckklJkkRRlCRJlmVbL8uEpmnCMNx6KY6QqPZSn3Vdx3EcRVGWZT7XZ2psvpyHSVR7qdJuV61onudRFMVxnCTJhotBotqZDdsCKVn5dxzHaZrefhnatm3bdnKyMAylqaqqKggC+6eyLJcswMK3D0rT9HQ61XV99Tk/yd4T1V7qUwK0TJbnuROmFxZYURRL3u5o2zYIAlnUOI63zf3HSFR7qdJuV62oBqm2bXWxN0Gi2pkN24IgCOxeX9uFW8qybHJrqarKNv1pmjZNI/+u63phE7bGt46iKAzDzY8C956o9lKfaZraw+g4jvXfHtan7kqrqto29x8jUe2lSnfUipZlaQNfWZab5FRBotqZrdqCPM+dwxTVNI09KdC2bZqmRVFIZTuHI3me2xflhILsYLIsy/Ncp3TeLv8bBEGSJM5snSnrug6CwPlcWaowDKWzXZZWXkzTNM9z+RbOx2VZpu1IlmVJkgRBIG+xB3nypZydjZzQkdanaZosy+SN+q31s2SRNmlbrV0nqpH6lFWppTVen7KadKWP1Kez0ufXZ5ZlYRjqR9ilcupT3pgkSV3X8m99V78+0zSN41jr0/lxLq5P/VWLojj3C9/GARIVregarWgcx/awZFskqp3Zqi2QDan/elVVURSVZVkUhe4nkiQJw1BahCAIdHOSnhg5+pHTE1VVycRxHGdZdjqd5OApSZI4jquq0q2lbVt5Y57nVVXpptifUpY2CII4jm2LIJ+VJElVVbrdyjz1BLy0dzqZ3YvUdS2931VV2SM8+6W0LZMvKG+XxavrOgxDbfXiOJavUFWVDKfYdnfV7TxRnavPPM/l95ccIy8O1qesoKIoZF3Ii+fqs7/Sn1SfEn2SJLG5ql+fMk8pIcncErsH67OqKjmHeN361J1fEATXPaX4VAdIVLSia7Si8itdZQUtR6LaGd/agjAM7cG3bI32vIZuIXaXJlu+zlnHasgm2jSNjRdOa2K3w5Epm6bR/Zb9Fv1tT9oC+bcsQJIk2lTJxm8/wr7XjorQVGQ7zO0CZ1kmE8dxrI2R7QzYdijV8RKVUx5RFEkpDtanjMDVKe0KcupzcKXr3GbWpwxPDoLA9igM1qdkGp1hd74+nTM15xb1SfWpO7/Nu1EPnKhoRZdUKYkKl/OtLbCbn24MdpPTcpeO4jlzlvlEj+zW6LQFI1PaCXSnda4tcF5smkYvxhlvC2QCmTgMQ/mrvXbPOb8jE9jvK58i87E719s7XqJy4o5mgsH67BfPuTkPrnSd25PqU04DOScZnQXov+tcffYT1fL6dL7dhqP9DpyoaEWXVCmJCpfbqi1wRv91XSdHLbZnZbwtcK5rtXuRfltw7qqiflvQn7KuaxtNZMSAftactsDuOSbbgsGLdaUHPo5j50SJ/Aj2LfbCn21HA+w6UQ3WZz9R6dH/YKKyZzdG6vPcSu/m1acdVuK8ZWaiOlefg4lqYX06iWrDXdcBEhWtqP6vnXJhlcoZT/2rDLfqz+02SFQ7s+FVKnYL0fGPck8deVEvBh5sC+yozLZtNUkMHrfZLdCea9Deb92c+lPKuXb7FjuEU/apeaHB5fAAAAswSURBVJ5rE+a0Bf0+8KIodMCBHk3KAtgmsm1bmbkM6pTZOtt2WZb2gik5mSL/Hhm1ehu7TlTdmfp0Ds2lEs7tqzTR2suF+vU5uNJ1bpP1KYNz9S2Dmc/Wp7M3GqlP3RnrTmVhfdrFkzspbNiNeoBE1dGKPv7vFVtR+Sxd/jiOncs+bolEtTMbtgVyKCM7HqeXRQY26uDHMAzDMGzbtixLOb8u25IcTMhd42R7kBMxstk4133IyXsd+yJk5Ka9j8vglNKHLFu+c0gngxx1UVNz6YpOJhPostk+Z/kgGUaqrzhfSkZDy165fxcf/V/7Q8l8giDY+9GVb/UpL8qq1CHk5+pT1qysSnn7ufrsr3Qxpz6dwea2vJ36tFdm2clG6lM+3e4+L67P7rEmpX9i83Mrx0hUtKLdVVvR8W96eySqndn8+QmD8f9JxwTzx18vnPLc22cu7bnJBl937jFjr9XXw6+qqra9V8q4vScqMbl2LpvDIOrzlo6RqASt6BpVuvlNkjsS1e5s3hZgUl3XcsQpx2cyCEA7sbdeurOOkagw6Z7r8+qzwkqo0v8/z6vPEYq2ACshUcFnJCr4j0S1M7QFWAmJCj4jUcF/JKqdoS3ASkhU8BmJCv4jUe0MbQFWQqKCz0hU8B+JamdoC7ASEhV8RqKC/0hUO0NbgJWQqOAzEhX8R6LaGdoCrIREBZ+RqOA/EtXOPDw8nIAVPDw8UJ/w1lXqkyrFqq5YpYpEtaITR1dYx1VKi/rESq5YWlQpVrJGaVGsK6ItwEpIVPAZiQr+I1HtDG0BVkKigs9IVPAfiWpnaAuwEhIVfEaigv9IVDtDW4CVkKjgMxIV/Eei2hnaAqyERAWfkajgPxLVztAWYCUkKviMRAX/kah2hrYAKyFRwWckKviPRLUztAVYCYkKPiNRwX8kqp2hLcBKSFTwGYkK/iNR7QxtAVZCooLPSFTwH4lqZ2gLsBISFXxGooL/SFQ7Q1uAlZCo4DMSFfxHotoZ2gKshEQFn5Go4D8S1c7QFmAlJCr4jEQF/5Godoa2ACshUcFnJCr4j0S1M7QFWAmJCj4jUcF/JKqdoS3ASkhU8BmJCv4jUe0MbQFWQqKCz0hU8B+JamdoC7ASEhV8RqKC/0hUO0NbgJWQqOAzEhX8R6LamYeHhxOwgoeHB+oT3rpKfVKlWNUVq1SRqFZ04ugK67hKaVGfWMkVS4sqxUrWKC2KdUW0BVgJiQo+I1HBfySqnaEt8E1RFF3XlWW59YIsRaI6JOpz1VnhKqjSsXlefY5QtAVeyfNcW4E4jjddlq7ruqZpzv2pqqrx95KojmdH9Tm5NyVRHdWOqvQ2rag7z6vPEeoYbUHbtnVdh2GY53ld12t/XJ7neZ5XVRVF0RVn2zRNkiT6v3Vdp2l6xflfIAzDwWVomiYMw/H3kqgU9bmGpmlOp9PgPmnOdydROajSlWzeirrzvPocoZwVNrP4lvemrrHFhmE4GfmF9AlfTJuALMuWzMcRx7FzNLP5AdbI0dVt9ljU5wXupz5HVtOGiYoqneN+qnTzVtSd59XnCHVZWzBYo23bzvzQLMtmbrRPMrMtqKpq4VHLdQ+qRmYrh3Ez336Dw0rL50RFfS55+/zZPqk+R/YrF/NkX0WVXsDPKj1kK+rO8+pzhBpvC4qiyLIsTdM4juWIpK7rPM+DICiKoigK2f7rus6yLIoi+Yduk3mep4+kUtu2LYoiiqIsy4qisOWbJIlMqduzdNimaZokify1bVtZGOmgjuPYHufZtqBt2ziOZeHl7fqNkiSRr2PfaxdVp4yiqKqqPM+TJJHSL8uyKIowDOXr9xfedjhLozPnRfmyzivdU5qtqqpOp9P4Tquu6yiKdD3GcSy/v3x0mqZZlukakTXVb15l4WUtjy/SDRLVzPosy1K+YFEUaZrqkusa119+YX3KryoLWZal/sJiSX3qosq+QddO27ay6emHzq9PrfnBF52femF9pmkaBMH4NE+qT2lqnHnKGR/5lfxJVLSitKLbtqLuPK8+RyhZYbrBhGEo/5Cqsnsa2zc72FrJCfiu64qikLfrZE5N2w1eZ6gHZ/ou/UdZloOf7mwnTuFKyfYXuL+BlWWpr9gDGrvF2qMc5+vbg0X7J2fP7UzQNI09SB3c7J80yGDOkWWWZfJFmqbRb2Q/wvm4/k+qLeAt+6iW16f8kvJdZEo7wMIpyCX1qf+u69o5rXNxfaZpakfaaosv+9T+Z82pTwl8+qJMcG5DGFyq7on1Oefo/6n16SSqwdV0ztUTFa0orWj/350Hrag7z6vPEWr86ErahX5TeK4t6L9YlmWe53rgrp/SbwvsfOQTbVPSbwvKsnQWrF+4g5vo4B5Lp7Sbn3YJOPpfXzYte9Ash2vOZM5H2/3BwqOrmZqmkYXX71VVlf3cJEnsb+j8pHYV+3DWb359VlXVP8nStq00/SOV05/hzPrsr7iL69P+1e7hwjAcPJ6eU59xHPd3Huc2hM7X+rRbkDPO158+KlpRWtFtW1F3nlefI9TkCADp2NTtUwzWQf/FKIrk0Hny6ErmL/RPco7GKdbusX3pbzlL2gK5vEWdW87Bb2oXxrYjg22BtK3ONx2cbffEEQAzyYGsLtv4qnF+Utt4+ZCoutn12V/p0nsviWSyj+pJ9SmdE1esT+lD0k+f7IaZU5+Dw2XObQjnPm7z+rQFWVWVn4mqoxWlFd20FXXnefU5QjkrzKk8e0J9sFfTFkp/C5ksON3qbFOoL8qOZHCopg4csS5oC2Tm2ovrLMDMtmCwHZc2VF+3593tktj5LLxKZeaYVjnY1ZNEeryly2+XwflJB3vjz1kjUV1cn/0dgO2kOZeoLqvP/tgUncll9emslKcmqsH6dGpelvbchiBucxXVk+rTOevnSaKiFe1oRX1qRd15Xn2OUOMrTIa+dkMbc1mWTdM4Qxrte22RZVmWJIlub3rGXU8n6wFK0zTaNS0n4KMoCsPQ2SoGe9Gdwk2SxJ6utpuKLJgdFKkHgnme68ZgT3irtm2db6qblvR161hRXQAZiakTyxe0L+ovdvGdVIqiCIJgZnPg7Id0mI4dCSGcn1RGpOrHjR/53eB+VPPrs3+Mrvsq+dnzPNfVsbw+z53Quaw+bXeac+Kmv8bn16cOqrU1P7ghiCX1KaOLZk48vz6dKbWRkTG/47cnuNn9qGhFaUW3bUXdeV59jlDjK0z6VAdv+FaWpT32kinrurblKOfFnQMpnXN/S7DXrThnxJ1hH07J2gXQOVRVJW9p27aqKrt7sCMKVVVVdpFkhjLPwQ+y31Q2bPkIO738es6eqa7r/ovC7tf7HfLj5t8epn/IKIvUX0fyTfs/XdM0kxfD3yBRzazPpmn0uzhv1/c6v8nC+nRusXOV+izL0u56B9fOU+uzv0PqehuCdXF9Nk0z2FExaE59nvumuuJuU59zZkUrSiu6bSvqzvPqc4Ty+W6/2n9rL+hIHi+D33TRVsQTqa4+k5UM1mcURVmWrXHvJU9Qn6vO6upoRXeNRLUzPrcFXdc5B0zdY3/DhouEmQ6fqLqh+nQORuGtO0lUHa3onpGodsbztgD7dQ+JCvt1P4kK+0Wi2hnaAqyERAWfkajgPxLVztAWYCUkKviMRAX/kah2hrYAKyFRwWckKviPRLUztAVYCYkKPiNRwX8kqp15/vz5CVjB8+fPqU946yr1SZViVVesUkWiAgAAWIpEBQAAsBSJCgAAYCkSFQAAwFIkKgAAgKVIVAAAAEuRqAAAAJYiUQEAACxFogIAAFiKRAUAALAUiQoAAGApEhUAAMBSJCoAAICl/g9V2E9kgpba6AAAAABJRU5ErkJggg==" alt="" /></p>
+<p>　　这个模式涉及到三个角色：</p>
+<p>　　●　　<strong>环境(Context)角色：</strong>持有一个Strategy的引用。</p>
+<p>　　●　　<strong>抽象策略(Strategy)角色：</strong>这是一个抽象角色，通常由一个接口或抽象类实现。此角色给出所有的具体策略类所需的接口。</p>
+<p>　　●　　<strong>具体策略(ConcreteStrategy)角色：</strong>包装了相关的算法或行为。</p>
+<h3>源代码</h3>
+<p>　　环境角色类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Context {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">持有一个具体策略的对象</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> Strategy strategy;
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造函数，传入一个具体策略对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> strategy    具体策略对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Context(Strategy strategy){
+        </span><span style="color: #0000ff;">this</span>.strategy =<span style="color: #000000;"> strategy;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 策略方法
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> contextInterface(){
+        
+        strategy.strategyInterface();
+    }
+    
+}</span></pre>
+</div>
+<p>　　抽象策略类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Strategy {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 策略方法
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> strategyInterface();
+}</span></pre>
+</div>
+<p>　　具体策略类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreteStrategyA <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Strategy {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> strategyInterface() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">相关的业务</span>
+<span style="color: #000000;">    }
+
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreteStrategyB <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Strategy {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> strategyInterface() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">相关的业务</span>
+<span style="color: #000000;">    }
+
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreteStrategyC <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Strategy {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> strategyInterface() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">相关的业务</span>
+<span style="color: #000000;">    }
+
+}</span></pre>
+</div>
+<p>　　</p>
+<h1><span style="font-size: 18pt;">使用场景</span></h1>
+<p>　　假设现在要设计一个贩卖各类书籍的电子商务网站的购物车系统。一个最简单的情况就是把所有货品的单价乘上数量，但是实际情况肯定比这要复杂。比如，本网站可能对所有的高级会员提供每本20%的促销折扣；对中级会员提供每本10%的促销折扣；对初级会员没有折扣。</p>
+<p>　　根据描述，折扣是根据以下的几个算法中的一个进行的：</p>
+<p>　　算法一：对初级会员没有折扣。</p>
+<p>　　算法二：对中级会员提供10%的促销折扣。</p>
+<p>　　算法三：对高级会员提供20%的促销折扣。</p>
+<p>　　使用策略模式来实现的结构图如下：</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3YAAADuCAIAAAD6EgJpAAAgAElEQVR4nO3dIajs2P3A8VGXNYVnlm0pdJ8J/GGhXFpTEbFUVaxoTKl8EFOoKSWiVatCZU1KqShPRFRUlKhVJbImsFBTotZl11WMWJm/+HF//c05mcyZyUzmTO73Ix5z8zLJmeSXk1/OOUl2IwAAAHBVu3sXAAAAAFtDigkAAIArI8UEAADAlZFiAgAA4MpIMQEAAHBlpJgAAAC4MlJMAAAAXBkpJgAAAK7sRIr5/Py8A5Z5fn5eJ5oBAEAkTqSYux3NnFiKKAIA4LUhxcTNEUUAALw2pJi4OaIIAIDXhhQTN0cUAQDw2pBi4uaIIgAAXhtSTNwcUQQAwGtDirnIMAz3LsIDIIoAAHhtSDH/p67rNE2zLCvLMs/zLMtOfkXmX6FsD+1VRREAABhJMR1pmpZlKZ+zLMvzfH7+pmnatr15sR7ca4siAABAinnApphlWaZpqv+13+8nv3JsOtRriyIAAECKecBvxez7PsuyJEmKoiiKQnvGdbrOL5qmyV7MT3w9XlsUAQAAUswDx8ZipmmaJEnXdZJZ2uk2xWzbNkkSadfU/xqGQVtDq6p6hVnma4siAABAinkgTdOiKLquc24Vl+mT89sUsygKHb7Z973kmpKwdl3XdV1d10mS3PIXxOi1RRFCPD8/7wCs5fn5+d4HPV4dUswDTsp47vTJ2cqylJZRdd0yx++1RRFCEBXAmjjisD5SzAMLU0zJJvVPafh0OsebprlmiR/Ba4sihCAqgDVxxGF9pJgHFqaYwzAkSVLX9TiOVVXpfyVJUlWVM/H1eG1RhBBEBbAmjjisjxTzf+q6lo5s+xyi/X4/2cd9bPowDNKWKYnmzMTX41VFEQIRFcCaOOKwPlJM3BxRBB9RsYT0isxPtHcf3lpZlk3TTN4TeYGQX4dzccRhfaSYuDmiCD6i4mKBGVjf94Ejvxe+oizPc+n5KYqi7/sli1JkmVfHEYf1kWLi5ogi+IiKy9wi91rY2HmjZ/2SZV4XRxzWR4qJmyOK4CMqLhCedckbxewwcRlrXtd1URQ6vW1beWlZ0zS2ybPv+7Isi6LQibJAeb6vLkEaSvXrOopdOs2LonDKVlWVXbudGP7TyDIvwxGH9ZFi4uaIIviIinNNPoxi5gkVzp2IXddlWTbZo+00Qw7DoO2aZVlqN7osUN5MYRs+na/3fa+DMmV+nU3fRqFpoi6nbdvJ3zI5vvNagz5fFY44rI8UEzdHFMFHVJxLmg9DJgo/xdQ/beY3ejmi/d+u62y6OZkF+h3l+/1+GIa2baXhc3xpLtX/lVzTFmkcR33Rrqrr2n8Kx+REnMQRh/WRYuLmiCL4iIoLnJVlLkkxq6pqXmiLo/OtY1+XKZIF6lcm01PJX3VFzgzkl9fFEYf1kWLi5ogi+IiKy4RnmRekmNqRbe8x1xGWgSmmHcGpX7GtmOM4Sje9U2z7QGLyy6vjiMP6TsTc09PTDljm6elpnWjGA9lxwrtUYJZ5boq53+9l4jAMOm5S7u+Z/JbzdbteTQSLoui6ThJWXeZ+v9cZtCfdTiS/vAWOOKyPVkzcHFEEH1GxRN/3ts3Pnygd3NLfLVPkjnIZB1lVlU3X5P5xe0f5MAzydc0pZYF1XdvZ9vu9dHA3TWMbPuVNuU3TyHJ0umS9ztM6dWadMvk4z8BnfOIYjjisjxQTN0cUwUdUAGviiMP6SDFxc0QRfEQFsCaOOKyPFHMNy1+q1vf9MAxXKcz6iCL4iApgTRxxWB8p5gnDMCRJon+maXruU39lpNGSAsgoe/uQucdCFMFHVABr4ojD+m6SYtpx3+t//eqSJNEipWl6br7oPF74XPZuzbZtbYr5KNuZqg0+ogJYE0cc1neTFNO+W0z59z+e9fUbCenC1lf9tm2b5/n6KeaxTfco25mqDT6iAlgTRxzWtyjFlC7gsiyzLJORgn3f13WdJIm8rUHSHXnorjyWoixLfUtY+UK7nie/LmQJ9sFs8qAN+br8b9/3mgJKOjifQXZdt9vtTo5xLIpCmhK1wE755fEffd+naVrXdZZlVVXp84fleXUyp83q5BkidoFN00hXeF3XutKmadI0dVocb7SdJRu2c15lO1O1wUdUnKQPqhR933ddF34NKV9ZfiUpbw9v23b5mHLcEUcc1heUYhYe+V/NjZwOXP99Yl3X6ThCeUyaJC66nPmv25Y8/V/90LatPnpNP/d9H9IRHDK0UXLo8TDFtC/AyPNc8lTJ6vTnyLfkt8ucdV1L8aTW1on6jDqb3unEYRjyPPcTzVtsZ7tGZ+LF25mqDT6i4iQZCK4HXZIkaZqelWJ2XWeHkl8gz3N5OmZVVc6iFt6AeNYPwXIccVjfolZMaa7zK5rJ1Me/mJbXOdR1naZpYOozjmOapnIxrROl+nNmXtI37ZDWR1mLppi2SGVZSgF01U6KqYXpus5JQ8fDHNS+GMMhraQ2n7vudnY69PV0snw7U7XBR1SESJJEjmhJN7Vr4qwlXLx2qXP0T72WFn79c5Y1B0Rh5IjDPSwdiym3OTt1zWTq4+Qifd9r9/rJ1jVJK4V924R80bnFuyiKYRjOve97hqR9RVFol/H48t4zLZJckZ+VYtZ13Ru6Lqdh1XZOyYvd9M/rbmfZkrfYziej6P37959++un79+9PLgqbwQkvRJIkkiPKyBab8A3DYA9nqYVkin3GmXzdVjL2K/pZvtu2rb43cnxpBPWbG+VqUy5Z7aWyvivSqcSkqtQ/+75vmiZJEvv1yR/lTJTXF0ntpCU8d/DAq8URh/VdnmLay1l5t5j+adu99IOT+ki7oHw+lvroRFuxalUlSd7kW9TyPA+8XTqkbpLRh1JT2xTTboHwFFNyMv8Fbroup4a1OZztvx6vvZ2dYVs65/LtPBNF79+/f/v27bt379q2fffu3du3b0k0H9S7d+9+9atfffHFF4Hzc8ILkaap1Dx5nstoGZleFIWMh5Y8b7/fJ0mSZVme50mSFEWRJIlUUDJd5rSDcHSiVEQydCdJEhkXJN8ax1E+2+p9fBnPIzNLhbPf7+XreZ5Lo4NmxrKioii08NIdpF/XusX5Uf5E+QnSZS/Fk8XG9hCSOHHEYX2Xp5i2WauqKnuQyzjFYRh0ot8GJje7jOMoLWH21bf+16URcXx5c67OJvfEpGnq9LkE9uDIlfTJLNP2jMv9LuNh66AUab/f6zxS6WuKqcWTlj8tpPzAuq51Yum9wFfX6Hx9ckMt3M4y7mocx7Zt7WwLt/NkFGly+dVXX+nEr776ikTzQX311Vd//vOff/azn7158+bdu3d/+9vfvv3225n5OeGFkONOOos0S2vbVtM1uR1wHEeZTftJNEvTZ65JGqp5p9R7MlFXp/3y0tAoE2WMjdwdqHPqiizJAuWzjh2yY0ntJa7Tgz/5o+xs9s5IyTvlA/llII44rG9RR7nc6tE0jT8c094ANAyDdG04PTVyX7NMdJrunPuHZCFN0+gS+r63uZRtqxtfarcQTj7n074n7T9ynkypFZzO2XXdMAxOj49N2lTXdXaidgDZDaV3i0/WpFffzjKz7tCrbGcniiaTS4tE86H997//ff/+/S9/+csPPvjg5z//+fv377/++mt/Nk54ISSzlGs8fUyENDTqcx4kCdNuaz/F1KVp37S2IEproh7UThZoVVW12+3s1exkiukPzq6qSto1d7vdTIo5+aNGkw1L+6VMHIZBf2bYhgRHHO7ggd/uo2PPndufJ+9AwsWWb2eNopPJpUWiuQH/+Mc/3r17993vfvcnP/nJH//4R7vfY65b4pFlmYzClNxLU0y52FPjmSmmzuxcMzsppnOdbJ8KHJhiSt/95ML9FNP/UbJSybP9Ef91XXPPUDiOOKzvgVPM8WUUuTOQnPzy6hZu591ud1ZyaZFobsO//vWv3/zmN2/fvv2///u/3/3ud19++WXkdUsksizr+17a/zTFlJ5rnUf6GQJTTOlgsQOEnOdI2CywO3xChWR1+l9aBp3opJjO23fta9LGwx7wYz9KZpNnDDvNq5J500sejiMO63vsFBMPYQdMuXdgxk66gzVRk7GYkhrKwGhJAWWwjdy4Izd6y+2JkvlJiiZzat6md8nog3hlnI98y15M6tedFFD+S9oR5WpTkk6ZWedJ01Qeqyl93/rIufFlDIB9TJv/o2SilNYO9NQCXG9jbx9HHNZHiomb2+12S1oiL24BRVScTnPqlpMk7dvv95rD2Wc7dF1nB6tIV4PMIx3ckszJEO2qqvwh2nairMsfCy5LkzTRKd4wDHbc9mTP+ziObdvKbFIS+19OOuv/qPLwjWj2TnPn8Ro4iSMO6yPFxM1JFF3Q5U1y+ehmbv2hbsFJ0o5b17WME5DhmNJGK+279y7gI+GIw/pIMXFzNooCE02Sy4cW8gAj6hYEOta2esciPSKOOKyPFBM350fRTKJJcvm4/vOf//zhD394fn5++/btycewU7cAa+KIw/pOxNzT09Pq9wBga56eniajy0k0SS4f2qeffqp3i4fMv+OEB6yIIw7roxUTNzcfRZJo7nY7kstXhboFWBNHHNZHiombI4rgo4cEWNOx3iTgdh4yxdzv9ydfLI54xBlFuC+iAlgTRxzW93gppr49wr47GzGLMIpwd0QFsCaOOKzvwhRzv9/LQ3GbpqnrOiTba5rGf6ftufI81/bLYRjIMh8CVRt8rzMqpPqiEwbre51HHO7rjBTTeUu1PAtXPrdtKw/FnVdV1UWFHHUt9gW44zgWRcHT0eJH1QbfK4yKpmnkndpOPQas4BUecbi7M1JM581gNsUcV3ldrL4MV/V9T0Nm/Kja4Lt6VOz3+6ZpsizTd14fm62qqrqupQdGcr558orthcUry1Lrz77v5wu5ROAFv9X3vV+7jsGbFA+Behjru06KKa/5GsexbduiKMqyHIbBvl5WpvsVX1VVMr8/0W/ynKw3z61MsT6qNviORYXz0upzhVQIeZ7rWtI0PbnGsiwX5lj+O75vWnFdsPCZr1DHbgP1MNYXlGKWZVmWZVEUkg5KRihX9pJ35nmuFaj82TTNeFg3dV3njMXMskzGJJVlqQmlzUqd1HOypluh9RQLUbXBNxkVwzCENCvOCMmHbEUUkmIu5Fdl4y3zNmmjPesrbdvOjGIixdwG6mGsb1ErpqSYTgXddd1kleSkmNKuKZ/1IURO57ufkvqLXX4LEW6Nqg2+yaiYzI2apnESoL7v7XWp/bq/BOfr9vZE7X6RmkcujJumkQ+yoqqq/BVJ1uj0LE9OHJd1v/R9Hz5nVVV939sqUTaUZu0ySEAq22EY7IX9MAz+dh7DNikeAvUw1ne1sZgh023dp62hzjzSAipCWjG5wo4fVRt8zq2EUr1ox4hM13RwGAY90nXUoF/VOBeck1/PskyW37at7THX52M4F8lFUdiGVamjJEvT1Ul6p8t3yuCnaPOthpZ0H52crSgKSYvrutYCaMltu6Yts3YZpWmq6bVOdOYXsonGcdzv99S9j4V6GOu7W4ppWzHHlwFYzrB659EeVVU5nWiT1TdiQ9UGn59iaoYn9YzNgdq21ZZF/eD0CA/DYNOjY19P01Sub53BkWmaOlOEk0jpn9Ii6M9zbH5r8t6ai9kGXa0kbWasSbNNbXVOWxU76fXMJh25vH801MNY3+WPXl+YYo5mLOZ+v9dThbYx2In2K/ZP54IbcaJqg8+PCud4z7LMz8PkPsKmaZwe4dG7BJ38+rGH+B5rVnSeWTE5zFFuT9S+l/lWwNHL25azq5Aa0rbajuNY17XUyTa19VuFR+8H+pu0qir5mYGPQ0Y8qIexvssfvS7VljMQU1oL5Bxg2yCPTZfmBG1gEFVV+ROFdtOMUzdpIk5UbfD5UTHf6z0eZk5OFjV615+To7SzLJu8uedYs2JRFHb+ybR1cuKxUs2s6zK250eTV2f8qJZQC2PbI20J54e/M/D9oVEPY32P9wLJuq6HYRiGgS7yRxFhFOHu/KhwBsbYhEYuOO2TK+QuFs3V/KZB/+vj8STpWJ+vn8VqIbV5z6aY/u3wTqnkeZyT6/IVRXHyPUC210gf5WFHEOlnm4zqnLaXfH7gwXi49Rbe+I/1UQ9jfY+XYuLhEEXwnYwK6Yq1eY/2hMgHyY3k8eDyp83enK/LO29tjmiXqSmXnS63ztiOF7nXR7pZdE5pEXQmKvsGsrPGjoffSy5rlx+iy9ffrrmgtPvKzEVRyJzSj6TPopc5AzcpHgv1MNZHiombI4rgeyVRoc8GapqGgT24o1dyxCEqpJi4OaIIvtcTFSc7u4EVvJ4jDvEgxcTNEUXwERXAmjjisL6HTDH1bUB4CHFGEe6LqADWxBGH9T1eiqlj6h/uqWyvNi2OMIpwd0QFsCaOOKzvwVJMfXXbOI7DMNwuy2zb9tyHwMkb1fwR/XJ7ZpZlkzecvgaxRRFiQFQAa+KIw/rOSDH7vp98avESZy2wbVsnS7MPBLm6C16P5r+Vzv4XKSagiApgTRxxWN/l7yi/irOaIf23Yjivd7suUsxroWqDj6gA1sQRh/UtSjHlzRCSV0l7ZNu2+kII+yxiebOwfZBv3/dVVSVJIg9StuMU5cnA/iuDJ3O+wESw7/skSUKaPJumkecSOy/5lV8qS9jv9/qiEfuEZHnjiL6z2C7WTzH7vvcfbrxJVG3wvXnzZocH9J3vfOfeRcAl3rx5c++DHq9OUIop6VFRFJJmSapku63ti90033LebCYfnM7uyRf4Ts45OfM4jkmSzP8EFdKIWNe1prY6FrOqKvuyOF2a/5P1jSOj9+ZiJ8W0L2eTxDTwVzyiHSkmsAmffPLJj370o48//vjeBQHwAC5vxbS3tkzmW5piOi8cs7fROFmjzUpH74XCkynmuTflzJssm52oOeixFNNuE9sQ66SYdk55K90Vf0VsSDGBDfjLX/7y9u3bb7/99pNPPvn9739/7+IAiN2iFFM/z6eYzghF+0U/xZSXBetriO3/LukoD2TbRHXJdhWTP+pYiunklM6f8lph4Y8K2BJSTGADPvzwQ+lv+fLLLz/66KNvvvnm3iUCELVFKabeD768FVPGYnZdZ2/fcR4kaTusRV3XdsnLXbcV05bNTzHtb9n2IzNJMYFH99Of/vQXv/iF/vnb3/72hz/84R3LAyB+lz8X07Yy2k7zNE0lYZKxmzLRjrC0LXZ6k7je8qKL2u/3fvrotFmG9y93XRfSpa69213XJUkiJbGprb2ZSeZs21bntGmlU1R/LGaWZZpYX/1W/aiQYgIP7Z///Of3v//9r7/+Wqd8++233/ve9/7+97/fsVQAIrfo0et683VRFJokyWPGq6rq+14zM8kXpWvYWYjTxjm+3Io+eZ910zQ6c1VV4ZlZ+HPa67qWJsamabSZVvqy67q2zY1FUeR5bufs+77rOplT7/WRR69LSmrvnR+GQSZuO78cSTGBB/eDH/zgr3/9qzPxiy+++Oijj+5SHgAP4Tpv95l5HuTVSfY2DMN1u8hxO6SYwOP69a9//eMf/3jyvz777LPPPvts5fIAeBRXSDHl+Y4kfDiGFBN4UN98882HH374n//8Z/J/v/766w8//PDf//73yqUC8BAe7B3leEREEfCgTj6f6E9/+hOPyQQwiRQTN0cUAY9IH4Q5PxuPyQQwiRQTN0cUAY9IH4Q5j8dkAphEiombI4qAh+M8CHMej8kE4Dtx7n/z5s0OWObNmzfrRDOAq/AfhDmPx2QC8NG8BAA4MPkgzHk8JhOAgxQTAPA/Mw/CnMdjMgFYpJgAgP/54IMPLh4V88EHH9y7+ABiQYoJAAi14+49AGGoLAAAoUgxAQSisgAAhCLFBBCIygIAEIoUE0AgKgsAQChSTACBqCwAAKFIMQEEorIAAIQixQQQiMoCABDq448/vncRADwGUkwAAABcGSkmAAAArowUEwAAAFdGigkACMVYTACBSDEBAKG4oxxAICoLAEAoUkwAgagsAAChSDEBBKKyAACEIsUEEIjKAgAQihQTQCAqCwBAKFJMAIGoLAAAoUgxAQSisgAAhOK5mAACkWICAADgykgxAQAAcGWkmAAAALgyUkwAQCjGYgIIRIoJAAjFHeUAAlFZAABCkWICCERlAQAIRYoJIBCVBQAgFCkmgEBUFgCAUKSYAAJRWQAAQpFiAghEZQEACEWKCSAQlQUAIBTPxQQQiBQTAAAAV0aKCcTi888/3035/PPPmYd5mId5mOfieZ6fn0esjhQTAABs2Y4xxPfARgfuz15zAzEjVvGISDHvgo0O3B/VHx4FsYpHRNzeBRsduD+qPzwKYhWPiLi9CzY6cH9Uf3gUxCoeEXF7F2x04P6o/vAoiFU8IsYQ3wWVBXB/nLbxKIhVAIGoLID747SNR0GsAghEZQHcH6dtPApiFUAgKgvg/hgnhEdBrOIREbd3QYoJAAC2jNb3u2CjAwCALSPFvAs2OgAA2DJSzLtgowP3xzghPApiFY+IFPMu2OjA/VH94VEQq3hExO1dsNGB+6P6w6MgVvGIiNu7YKMD90f1h0dBrOIREbd3wUYH7o/qD4+CWMUjYgzxXVBZAPfHaRuPglgFEIjKArg/Ttt4FMQqgEBUFsD9cdrGoyBWAQSisgDuj3FCeBTEKh4RcXsXpJgAAGDLaH2/CzY6AADYMlLMu2CjI0bPz887bNfz8/O9Q2wcCTOsIpJoHwn41+qOEUiKiRjtuOLctEj2byTFwLbFE2bxlARruuN+J+AQI6rCbYtk/0ZSDGxbPGEWT0mwJlJM4ABV4bZFsn8jKQa2LZ4wi6ckWBMpJnCAqnDbItm/kRQD2xZPmMVTEqyJFBM4QFW4bZHs30iKgW2LJ8ziKQnWRIoJHKAq3LZI9m8kxcC2xRNm8ZQEayLFBA44h0TbtqVR1/XJJTRNk+f5zQo4juNY13VZlvqnlG2/34cvoSiKLMuWlKHv+zzPsyyrqqqqqiWLWlMkp7qTxZBdrNYpVaD9fl+WZZqmdmKWZW3bXmX5ctANwyB/VlVVluVZC6/r2ineBeQYKYrigcLbEUm0j8dLMgzD5J6ajLE1tW0rASAl0fCT4Aw5EdhFZVnWdd2S8lRVlWVZnud1Xfd9v2RRayLFBA74h4St6fI8L4pifgkr1Ixd1+12O6mz+r7f7XbnZiFd1y0ppJwYJKl1Tuf7/f6sZNfXNM2Sr8+L5KQbWIwkSQLPTDfdaL6u65IksVOSJAlMxUKKmiSJhnSSJBfEqlO8c6VpKlve/6ULN/W1EvEQkUT7eLwkZVnudrvJnMnf8ivTmjxNU43ALMsuKJWG02X0Ome/3zuLWhhOy6vreaSYwIH5FLNt2/vWekJSTKl0qqpaP8Usy9Km2rbVtqqqhdfrC5tX50Vy0r16innTjeZbcvoPKWqSJDKbXEGtnGI6R4dtUh0Xb+o191Qk0T4eL0mWZWmaTl6cRJViakmSJFk/xbRrbNvWXuQsDKfl1fU8UkzgQGCKKd2XkmZVVaX9Jna6TmmaRrpamqaxlanTAyhdMEVR9H2vfYXaU7/f72V+qRT0HCxX1TbFlJ5rOSnK12W9wzDo6uQkKlOcTh/potV2BVmpJJF1XWteK1+3X5R1JUlSFIWuaPJH2RXZtcuK5Oc4SbP9Uc7Evu9lsfKtqqqkb2ty8EAkJ90LUkz5UU3TyGbUsAnfaH7Q6jJlA9pIHl/2ndNMInutaRo97dld7M952f7VE7lEmk34bHzOlD9JEjlknPTF+VGT8dn3fZIkfvuQX36NtLqu7fGlS7Y/qqqqoij06zY4nYPOmVhVVdu2ciTKeuXDyRasSKJ9nE0xy7J08iQnxmwdqFvVzqk7/dgxImQDOnXI5JaXsCmKwqaYfd/3fW/TzdELp2O1vaSYsi5bAKcGPhZOk10Ek+HkH+N2RfaXTlbXkz/KmSi/a/LENHpIMYEDMymmdFLI0dt1nVRAeZ5LO6J2q2nFJORPqS5lPI2cdSR76Louz3M9XUnuKFOyLJORQHmeywIlL+z7vus67a+RE7AsQfqvm6ZpmkbmlBVVVSULqetaviUrKopClqnne2lRkIlSPfV9L9+SYUCazsq5tigKrTGl/PLFruukypv8UbIimU22iSxBamGpjjW18n+UFlUmysK7rpPPUmzZLyH79y4ua8WUWNKzr2z58I02GbT6Z5IksliZuSgK2ap5nmsrtXyWiXqi1V1si7pw/8qJfBgGGX+mB5Qfn8fKL9dgUlQtgP+jjsWnnH3zPLcn2snyS2GknHLKlxXJwWVzcTly9cC328r5UeM4SkWhO0iSA61/5Ig+2cUZSbSPR0rSdV1Zlk5rpR9jUgfK/pJo0SDxY2zyGJFN1zSNrEurrMktLxPbttVrG2lqlQts3cXjVDhN1vbjSy0tyZl+XQJeyq8RPhlOskBbyPFIOE0e47oimV9CerK6nvxR48vFlR5NEnv+iSlwv68jltAHrMkUU05XWZY5TTLSUjKOoz26ysOxmNrwYJs/5dwpMzgpqW2S1PpRvquNiFKPSOUix7mmfZpXlS9Nj3a9+qet1vVzXdc2G7Az7HY7qZjsJbgMY9esTkx2Cfk/Kssy+aBZr67L6RWd/FF2NrtGW6ePUyI56V6WYpamgdyebwI32jgVtHru0QabruvkysQWQ9v2dI3+WExb1IX7V0/q0solX5mMz8nya5m1bHq55fwo/ezEp3zQ66iZ8stKtWCaoEtvpp98O9vt2EGnH2yLr+ZSeZ6H3PMRSbSPR0piW+nk5xyLMUn4xpe7cGTiZIxNHiNy25Z+S9Y1ueVttqqBJ1+XlEuvGSbDabK2Hw+PVh0Y4Fww2xmccNLyaOeVXa+/VZ1jvGka+fmSoJemA8Gpro8dI3Zossa/f2LykWICB+Y7yi+YfqzSkbpMblp0Ukw/RZPKSKtUufrXS1WtNeRaWbJhraeOpZj2ulnn0fzcFZ4AAA+pSURBVGTa9gf5+YQl9bttGJhMMZ2Jkp7aK3Vdl7NVJ3+UvRE1NV32sli5232ytJGcdC9OMW17s34O3GjjVNBOpmjdy0gMIcWw3z2ZYi7cv5JZSpOJrncyPmdSTKdskz9qsvCWfGsmm3f2hZBrSCn8fIp57KDTHyK9B87Xj11BOSKJ9vFISWT7yBaQ3zgTY5KG2tx6MsYmj5HJ/XssnPTrNsXURk0t1bFj5FiKqQWwpbJfnzy0HdKTZiu3yRTTDw850chPnkkxjx0jeh1Y17Vdu3Ni8pFiAgfWSTHtXdjO/JO1oRzYtvKVi3W5GdOmmP7trmelmJP3y/v5hDMs0qlAT6aYOk7AX/hkCjJ5D69UtdKu4E8/NkwtkpPuCinm5EYLTzH92LZBO59iLt+/clKXe9psiunH51kp5rHMzNnOMjhE/5TBasfKP07lBKm5heVkijl50OUvnCVLRnXyuRYikmgfj6eY8kH7ZGdiTObRrxyLsWMppq0QpO6a3PJ2g9sUc7/fJy9DL/wqVJ2bYk4OdfDDyZZTer31z5AU03Z5z7diHjtGZGCGNOXa6c6JyUeKCRxYJ8W0Dz+S+fUse6xBJTEjviXF1O4hrTVK0yUq9weMASmmdhjZ++VlqI2uzk8xba1n/1d7fJwZ7I/yTyR6AtB1yd0bx36U9NHID3f6aJxmM0ckJ92rp5ghG20MTjGdVWvLsZ4U7ZAyv6jL96+0i0jDlZZ5Mj5Pppi278//UZPbWS7b7CaaKf/onbb93samaTSZ0CZ/OUCOHXQS3pLdOqNTjj3lxxdJtI9TJZFKTD5rVTYTY3rJoV+ZjLHJY8TmWHKfynhky9vFavKk3UF6q6XM4IfTTIqpIaRF1VE9MqftNHdSTNtN5FxgOOE0Th3jEoF24VoYv7qePEakoVfyb+fqPZl9WhkpJnDAf/S69I84x1VZlnLUlYd3hvrTbX+Z1F/SkyvzSN2XJElRFPYWP//RvqnpDpa1dF2nPThyna2r0yerSzWq65Xlt20r35UqIzVDgmRgqHxdRyzpfYvOiVbvkLCllYtsbQw49qNkLXJZnBwOMJKv2ynOjxpfrp5l4c5ldNd1x3rJ/f17L4GPXteNPL70kaVpKvfV2p0+hm00PzhlmboN7e1c8lm+rjtOAkkmStnGI7t4yf6VXyf/So+zHoBOfM6UXwPeKb/zo47Fp5TZuRr0y69PCJeZdR5tgJTC24NX1p6ZJ9X7B53UD9pZYTOMMbiXfIwm2kevJDaYx5fLQu2K9WNMpIdPsfBjbOYY8Q+HcWrLj+Ood7TIoqQ8UuH0fS9FlVDxw2mytrfTbTjJXpZQkYnHwkmnFN4rM5xwmjwxSUnKl7vZbMbpVNeTP2p86WqQLoXEG3x/rJfc3+9riiX0AWvNQyKwKULuVHBqlnkzx3xIGcLfHrHkPRMzhZz8L+fZhPZJH9quII1eMw9zieSke4tinNxoF5jcv4HLXLJ/LyhV+JzLw3vhFpicbtcl/ZL6Z2qeCaCNcCEiifbx/JKc3EQzs6282PBwujjsJVk8K5x8Z9XVdmZ7D9ZongMfcmIixQQOxFMpqyRJkpc7LiFkjLl0I2ZZJhfl0rM204Q5RrN/IykGomXbQSWn1MEh4QuJJ8ziKQkuoHFohxyEnJhIMYEDVIXbFsn+jaQY2LZ4wiyekmBNpJjAAarCbYtk/0ZSDGxbPGEWT0mwJlJM4ABV4bZFsn8jKQa2LZ4wi6ckWBMpJnCAqnDbItm/kRQD2xZPmMVTEqyJFBM4QFW4bZHs30iKgW2LJ8ziKQnWRIoJHKAq3LZI9m8kxcC2xRNm8ZQEayLFBA5QFW5bJPs3kmJg2+IJs3hKgjWRYgIHnp6edtiup6ene4fYOBJmWEUk0T4S8K/VHSOQFBMx2nG1vWmR7N9IioFtiyfM4ikJ1nTH/U7AIUZUhdsWyf6NpBjYtnjCLJ6SYE2kmMABqsJti2T/RlIMbFs8YRZPSbAmUkzgAFXhtkWyfyMpBrYtnjCLpyRYEykmcICqcNsi2b+RFAPbFk+YxVMSrIkUEzhAVbhtkezfSIqBbYsnzOIpCdZEigkcoCrctkj2byTFwLbFE2bxlARrIsUEDlAVblsk+zeSYmDb4gmzeEqCNZFiAgeoCrctkv0bSTGwbfGEWTwlwZpIMYEDVIXbFsn+jaQY2LZ4wiyekmBNpJjAAarCbYtk/0ZSDGxbPGEWT0mwJlJM4ABV4bZFsn8jKQa2LZ4wi6ckWBMpJnCAqnDbItm/kRQD2xZPmMVTEqyJFBM4QFW4bZHs30iKgW2LJ8ziKQnWRIoJHKAq3LZI9m8kxcC2xRNm8ZQEayLFBA5QFW5bJPs3kmJg2+IJs3hKgjWRYgIHqAq3LZL9G0kxsG3xhFk8JcGaSDGBA1SF2xbJ/o2kGNi2eMIsnpJgTaSYwAGqwm2LZP9GUgxsWzxhFk9JsCZSTOAAVeG2RbJ/IykGti2eMIunJFgTKSZwgKpw2yLZv5EUA9sWT5jFUxKsiRQTOPD09LTDdj09Pd07xMaRMMMqIon2kYB/re4YgaSYiNGOq+1Ni2T/RlIMbFs8YRZPSbCmO+53Ag4xoirctkj2byTFwLbFE2bxlARrIsUEDryeqrBt23Ecm6a5d0FWFcn+jaQYK3idYRaJeMIsnpLcmoS6hD1IMYEDVzwkhmGo6/paS7OLXb6Qoih0afr5FoZh2O/3537rWAXd9/3CZCWSU91rC7OmaW6aZcYWZpGIJNrHa5ekbdsLdvcK6rrWoMrz/KbruiCLnTlMbrRJSTGBA9c6JIZh6LouSZL52fq+T9O0bdu+78uyDMn20jQty3JJ2YqisAlEVVU3uube7/dFUXRdd9a3uq5L09Sf3vd9XdeT/xUukpNu5GE2DMNutzt3xzmcMLvdlUyEYRaJSKJ9vF5J9vu9BPPJ3V1VVZ7nfd+3bZtl2cn58zzPsmxJ2ZzLdTnWlixwRtd1F5Q2z3N/O4Rv0guQYgIHnENiYR1x8tw/jqOtKfI8P5ntLWxeGobBv7xeWLfOKMvygprrWHmOpQXhIjnpxh9mfd8vKZIfZjc948YWZpGIJNrHawd8SD7UdZ2uZRiGkB26sGrN89xZwk0bMi+otGcOE1JMYA33PfeXZalrvFFP0GSbpV85HnNuLXzy3G9/pn4mxTzLLcJs4el2MszCT4qPHmaRiCTax3unmGPYMbKwyvXDqa7r8EEs517UkWKeWPW9VgzMmK8Kpdpyuhrrui5fONWEX68VRSFf1+PZ1hRZlvV93/d9VVXyuaoqPfj3+33TNH5doGu31dnkxPFIxRTeCJRlWcileVVVZVlKX5UuuWkaLZVO0XO5nZ5lmfwpXV262Mlzv2zSwJ8QyUn3gjDTTef3OF83zORPf5nLwyz8pBhbmE3ukfhFEu1jQIrpB5Jucz+6/DpQK2HdQTbFlL7ycRybppFO87qui6LQgJTpTqn8ZY7HI6Hvez82nDR3Rtd1u93u5JWV9MXLBtHCy6rlQJAw3u/3OjZAOsFlTplnsvyBp5VzkWICB+SQkCOwKIo0TeWDHPzHTlTywa9QnPN0lmWyHDuSRsZWCnuTQZqmcmw3TWOrHqcusFWArq4sSzvq3H79WIoZWBWG3FfRtq3WX5r52Z5T+3ly6yVJImsZhsEW2D/3Z1l2slHKiuSke26Y2V5mP5m+RZg5y7xKmIW3lEQYZv4y4xdJtI8vJZEMyQa87IvJ6LLb2QknJ5DatrU7Wv5Lgt9Pp+yf/sXS/DLH45EwmU2eNWIy5NCYrO6cq0f9OX6Z7W90Lqv808qxQ/sspJjAgZmrbbmonfxW27Z1Xed5PpNiHhsPdKwOOtZV59QFJ5cpV67zq/OzliVsk5Iu2dZZoyn25LnfFtJuw5lzvyzzZGdTJCfdC8Jsv99Lv5ufqN0izJwU8yphdt0hv6uF2QVdrpGIJNrHU62Yx4JQbr2SlNSZ3x4Ck3exHGtBPNYs56SYIcu0kbCwFTOEc2hL9HZdZ9erHRfHUkx7yNiyOZt05tA+CykmcGCmKjzW1JdlmZzV5lsxjw3wOnbenckJbF0wecKTy27pDO26zjYILRyLGcKW0J77J6uwhSmmpJX6S0+WLZKT7rlh1ve9tk3Ot2JeK8ycuLpKmF03xVwtzOQsflaYRSKSaB9PpZiT0ZXnuWY2862Yk63jMynm5B6cT7l0mTORsHAs5klOWGqK6dQe10oxjx3aZyHFBA44h4StIPq+tz0j0tto25xOdpQ75y35sDDF1MxDyGdnoq0gVrij3LYk6VV1Xdf2UthvXmrbdvLc72w0P8XUzyHj5SM56Z4bZpMtduoWYXas811cEGZXv6N8tTBz9ggp5gVmAn6ciq7JFjvl1IFVVdkFHrvgF4Ep5uQy5yNh4R3lIWmcv02cMR6TF6J24I2tRpz2/pnTCikmcB3zh0RRFPryBvlgj/CqqoqisBWTc57W898wDHoiTNN08gAO7CiXWk+qA12mbfTy+ziWPBdTBlHNzyPbZL/fy1AknV/Xa9eYpmnTNDLySUcapWmqc9qBg36KKf1o4+EmnRHJSffcMNMrGRnNVte13Sy3CDNnmcvD7KwbZWILM21R0z3yECKJ9vFUSSajSyNW7sWx9arfxKgjC+u6luU0TTMZQs5YZDvdSUn9ZY6zkbDkuZhN0+jI4Bl6fpH78yS8NVm0l08ycKvrOrl1T76lv3G/3zvpr39amTm0w5FiAgdOHhJyN6JzzV3Xtd6+pxOli6HvezuzjC6ys8k8dhXyLFyZ7lQ6k8uUAvhpYtu2x3JHrV/ObVvqui6wS71pGr/8Xdc5t5VIGuQ3QMqGcjbd5GYZhkHWFVKqSE66F4SZjRw9GdwizI5NXxJmk1+c//mxhZk/Z/wiifYxoCST0SVXBeNLu+Z4GJzO3nRyvq7r/B5e+a5/LBybPnlFMRMJ9trv3IcPBF669C+vnpo53rXwklnqnJqy2+08v0kXvpWDFBM4EE+lfGtSd9zi3YMxi2T/RlKMFfCO8juKJ8ziKcmt8Y5yixQTOPB6qsLXKZL9G0kxsG3xhFk8JcGaSDGBA1SF2xbJ/o2kGNi2eMIsnpJgTaSYwAGqwm2LZP9GUgxsWzxhFk9JsCZSTOAAVeG2RbJ/IykGti2eMIunJFgTKSZwgKpw2yLZv5EUA9sWT5jFUxKsiRQTOEBVuG2R7N9IioFtiyfM4ikJ1kSKCRx48+bNDtv15s2be4fYOBJmWEUk0T4S8K/VHSOQFBMAAABXRooJAACAKyPFBAAAwJWRYgIAAODKSDEBAABwZaSYAAAAuDJSTAAAAFwZKSYAAACujBQTAAAAV0aKCQAAgCv7f+DtekUdpz97AAAAAElFTkSuQmCC" alt="" /></p>
+<h3>源代码</h3>
+<p>　　抽象折扣类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> MemberStrategy {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 计算图书的价格
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> booksPrice    图书的原价
+     * </span><span style="color: #808080;">@return</span><span style="color: #008000;">    计算出打折后的价格
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">double</span> calcPrice(<span style="color: #0000ff;">double</span><span style="color: #000000;"> booksPrice);
+}</span></pre>
+</div>
+<p>　　初级会员折扣类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> PrimaryMemberStrategy <span style="color: #0000ff;">implements</span><span style="color: #000000;"> MemberStrategy {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">double</span> calcPrice(<span style="color: #0000ff;">double</span><span style="color: #000000;"> booksPrice) {
+        
+        System.out.println(</span>"对于初级会员的没有折扣"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> booksPrice;
+    }
+
+}</span></pre>
+</div>
+<p>　　中级会员折扣类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> IntermediateMemberStrategy <span style="color: #0000ff;">implements</span><span style="color: #000000;"> MemberStrategy {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">double</span> calcPrice(<span style="color: #0000ff;">double</span><span style="color: #000000;"> booksPrice) {
+
+        System.out.println(</span>"对于中级会员的折扣为10%"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> booksPrice * 0.9<span style="color: #000000;">;
+    }
+
+}</span></pre>
+</div>
+<p>　　高级会员折扣类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AdvancedMemberStrategy <span style="color: #0000ff;">implements</span><span style="color: #000000;"> MemberStrategy {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">double</span> calcPrice(<span style="color: #0000ff;">double</span><span style="color: #000000;"> booksPrice) {
+        
+        System.out.println(</span>"对于高级会员的折扣为20%"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> booksPrice * 0.8<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<p>&nbsp;　　价格类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Price {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">持有一个具体的策略对象</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> MemberStrategy strategy;
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造函数，传入一个具体的策略对象
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> strategy    具体的策略对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Price(MemberStrategy strategy){
+        </span><span style="color: #0000ff;">this</span>.strategy =<span style="color: #000000;"> strategy;
+    }
+    
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 计算图书的价格
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> booksPrice    图书的原价
+     * </span><span style="color: #808080;">@return</span><span style="color: #008000;">    计算出打折后的价格
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">double</span> quote(<span style="color: #0000ff;">double</span><span style="color: #000000;"> booksPrice){
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">.strategy.calcPrice(booksPrice);
+    }
+}</span></pre>
+</div>
+<p>　　客户端</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Client {
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">选择并创建需要使用的策略对象</span>
+        MemberStrategy strategy = <span style="color: #0000ff;">new</span><span style="color: #000000;"> AdvancedMemberStrategy();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">创建环境</span>
+        Price price = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Price(strategy);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">计算价格</span>
+        <span style="color: #0000ff;">double</span> quote = price.quote(300<span style="color: #000000;">);
+        System.out.println(</span>"图书的最终价格为：" +<span style="color: #000000;"> quote);
+    }
+
+}</span></pre>
+</div>
+<p>&nbsp;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中&ldquo;退休&rdquo;的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。</p>
+<h1><span style="font-size: 18pt;">认识策略模式</span></h1>
+<p>　　<strong>策略模式的重心</strong></p>
+<p>　　策略模式的重心不是如何实现算法，而是如何组织、调用这些算法，从而让程序结构更灵活，具有更好的维护性和扩展性。</p>
+<p>　　<strong>算法的平等性</strong></p>
+<p>　　策略模式一个很大的特点就是各个策略算法的平等性。对于一系列具体的策略算法，大家的地位是完全一样的，正因为这个平等性，才能实现算法之间可以相互替换。所有的策略算法在实现上也是相互独立的，相互之间是没有依赖的。</p>
+<p>　　所以可以这样描述这一系列策略算法：策略算法是相同行为的不同实现。</p>
+<p>　　<strong>运行时策略的唯一性</strong></p>
+<p><strong>　　</strong>运行期间，策略模式在每一个时刻只能使用一个具体的策略实现对象，虽然可以动态地在不同的策略实现中切换，但是同时只能使用一个。</p>
+<p>　　<strong>公有的行为</strong></p>
+<p><strong>　　</strong>经常见到的是，所有的具体策略类都有一些公有的行为。这时候，就应当把这些公有的行为放到共同的抽象策略角色Strategy类里面。当然这时候抽象策略角色必须要用Java抽象类实现，而不能使用接口。</p>
+<p>　　这其实也是典型的将代码向继承等级结构的上方集中的标准做法。</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" /></p>
+<p>&nbsp;</p>
+<h1><span style="font-size: 18pt;">策略模式的优点</span></h1>
+<p>　　（1）策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。</p>
+<p>　　（2）使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。</p>
+<h1><span style="font-size: 18pt;">策略模式的缺点</span></h1>
+<p>　　（1）客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。换言之，策略模式只适用于客户端知道算法或行为的情况。</p>
+<p>　　（2）由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		<p class="postfoot">
+			posted on <span id="post-date">2012-05-10 11:33</span> <a href='http://www.cnblogs.com/java-my-life/'>java_my_life</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2491891" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2491891);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=106378,cb_entryId=2491891,cb_blogApp=currentBlogApp,cb_blogUserGuid='739a0020-f8db-df11-ac81-842b2b196315',cb_entryCreatedDate='2012/5/10 11:33:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+			<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/java-my-life/">首页</a></li>
+			<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+			<li><a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/java_my_life">联系</a></li>
+			<li><a id="blog_nav_rss" href="http://www.cnblogs.com/java-my-life/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/java-my-life/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>
+			<li><a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div id="blog_stats">
+<h3>统计</h3>
+	<ul>
+		<li>随笔 - 28
+		<li>文章 - 0
+		<li>评论 - 306
+		<li>引用 - 0
+	</li>
+</ul></div>
+		
+<div class="newsItem">
+<h3>公告</h3>
+<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+		<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>			
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; java_my_life
+</p>
+	
+
+</body>
+</html>

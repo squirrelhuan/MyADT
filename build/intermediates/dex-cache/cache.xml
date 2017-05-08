@@ -2,184 +2,112 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-generator\3.0.0\ef03fdf4961ef0714ff37ab7480f46c4a437ba5c\greendao-generator-3.0.0.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="D:\Android\AndroidStudioProjects\MyADT\app\libs\thumbnailator-0.4.8.jar"
+        jumboMode="false"
         optimize="true"
-        revision="24.0.1"
-        sha1="ef03fdf4961ef0714ff37ab7480f46c4a437ba5c">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\greendao-generator-3.0.0_044a98495f0dad62a6fcf91babee45fe7bd81724\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.freemarker\freemarker\2.3.23\cd143cd8c02a9f838e3cb75a6dfe133750437f6d\freemarker-2.3.23.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="cd143cd8c02a9f838e3cb75a6dfe133750437f6d">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\freemarker-2.3.23_25ec0259f44e7df4b6050a0c096fa08b5106a554\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\libs\HapticMediaSync-v1.4.10.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="95be63896840de803bb7e6260c2ad25fe4962fa3">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\2\HapticMediaSync-v1.4.10_ada8658474cff7a89f25c19a28aee5fe75cb9d6a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_be958a9fb3e603bb2f8f3ec45a04ad1a324f2729\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao\3.2.0\e70040568b2929b8e5869ad1ffca8e4386dc53bc\greendao-3.2.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="e70040568b2929b8e5869ad1ffca8e4386dc53bc">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\greendao-3.2.0_a584c16f448569ed72551d6057e0354366b3f6ad\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_f4df95c8ed27a5d6926ab36d24617b012d292af4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_c17a8372749771270bd292b024ac583ecc8f0d12\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_024c9d4c121900ebce6105106b07400d8e10930a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_f275d93c6b9125813c6b6e98d59437721b7161b6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.zzhoujay.markdown\markdown\1.0.4\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="88b7823c77c25884f8057833b4216bdaaa25ca94">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.zzhoujay.markdown-markdown-1.0.4_65cc7020c1fa8ca9f88332fb723b43fe2960cdb8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\libs\fastjson-1.1.45.android.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="4d5140a0c8f5e4d0f263cac44dbac1019a908474">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\2\fastjson-1.1.45.android_d2e6a05b32508600a9150d2eebba8766bc31f2e2\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="d2689760f976635062bd27e95c6fdc6998ae56c5">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4753a5e51fda28cb80e522f2de978ca6a864e88f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\SDK\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_908ffce59dc1ff16194d73d781a950ee1ad8ba45\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="71a40ffe0e0580aaccb3c9d02c972250d7a0779b">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_0e05f10692f699d2ada1f1ff3a73048eccd71192\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_cbca4540292bcc518e7c926346f6db49ddbf9832\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_79224ecadfc0cf993cf0bb2ed0f7ab3d5217e4a5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\libs\thumbnailator-0.4.8.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
+        revision="25.0.0"
         sha1="4f10c440dd7776630aee9da4611a45032db1e041">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\2\thumbnailator-0.4.8_48a8d45b300e6aa821a66763a4fd0c827065063c\classes.dex" />
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\thumbnailator-0.4.8_f14e6cec9b94504cefb5b4cc5b5dfdd9c85c559a.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\libs\butterknife-7.0.1.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao\3.2.0\e70040568b2929b8e5869ad1ffca8e4386dc53bc\greendao-3.2.0.jar"
+        jumboMode="false"
         optimize="true"
-        revision="24.0.1"
+        revision="25.0.0"
+        sha1="e70040568b2929b8e5869ad1ffca8e4386dc53bc">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\greendao-3.2.0_2817659a1903d2707045d93fd57e750d96b54b3d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.android\build-cache\9e479fc70b74b6919f53112d5b6212d964886088\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\classes_5ed270fcab58c03f7941080f405dd520e3f1ee12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\AndroidStudioProjects\MyADT\app\libs\butterknife-7.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
         sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\2\butterknife-7.0.1_26c3f4029869e3b62a1218959a7e2c20c7d6feea\classes.dex" />
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1_c941bd42872b4a98b1674a9d5a208da32decb459.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\workspaceAS\MyADT\app\libs\jxl.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="D:\Android\AndroidStudioProjects\MyADT\app\libs\HapticMediaSync-v1.4.10.jar"
+        jumboMode="false"
         optimize="true"
-        revision="24.0.1"
+        revision="25.0.0"
+        sha1="95be63896840de803bb7e6260c2ad25fe4962fa3">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\HapticMediaSync-v1.4.10_9aa754bf90eb5e0cf9cd388d738e3cec399a5a79.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\AndroidStudioProjects\MyADT\app\libs\jxl.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
         sha1="a6f224353653001716448dec51065d050ac782b7">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\2\jxl_506804d0bc2a7d139a3d9a622bec2d607d76e683\classes.dex" />
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\jxl_6566940db39febe0049204561b854cdf98c367b4.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-api\3.2.0\c6d610abe1d75d758431c9234917a349abc0a0ac\greendao-api-3.2.0.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.android\build-cache\7758f923df33765daf06a214fd1b175d9d2faa27\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
-        revision="24.0.1"
+        revision="25.0.0"
+        sha1="88b7823c77c25884f8057833b4216bdaaa25ca94">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\classes_2a50fa361439a6f0087ade9efdeba22b3560a301.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.gradle\caches\modules-2\files-2.1\org.freemarker\freemarker\2.3.23\cd143cd8c02a9f838e3cb75a6dfe133750437f6d\freemarker-2.3.23.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="cd143cd8c02a9f838e3cb75a6dfe133750437f6d">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\freemarker-2.3.23_a7e48d93927d103027a43312a6755eead9763756.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-generator\3.0.0\ef03fdf4961ef0714ff37ab7480f46c4a437ba5c\greendao-generator-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ef03fdf4961ef0714ff37ab7480f46c4a437ba5c">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\greendao-generator-3.0.0_0ee1770f1367cce86aa97b0b6670cc765cbf8ebd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\AndroidStudioProjects\MyADT\app\libs\fastjson-1.1.45.android.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4d5140a0c8f5e4d0f263cac44dbac1019a908474">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\fastjson-1.1.45.android_1691c4e29e6bfedd0747c3e7948aaddb73f04957.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-api\3.2.0\c6d610abe1d75d758431c9234917a349abc0a0ac\greendao-api-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
         sha1="c6d610abe1d75d758431c9234917a349abc0a0ac">
-        <dex dex="D:\workspaceAS\MyADT\app\build\intermediates\transforms\dex\debug\folders\1000\10\greendao-api-3.2.0_bcb0f0d31e328b5ad99ce3d5063ea26fb25ba869\classes.dex" />
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\greendao-api-3.2.0_67e709b00b63bbf4dfb07f1b4b78565b9e2bc7bd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.PC-20160317VHFZ\.android\build-cache\0d35e22d0f188a6229c197dbdeb12a853ccad889\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="D:\Android\AndroidStudioProjects\MyADT\app\build\intermediates\pre-dexed\debug\classes_b706b11554982281fa1f91106aefdce46f098320.jar" />
     </item>
 
 </items>
